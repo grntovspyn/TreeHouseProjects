@@ -18,6 +18,8 @@ session_start();
 // Include questions
 include ('generate_questions.php');
 
+// Set session indexes that will be used to avoid warning messages
+
 if(!isset($_SESSION['count'])) {
     $_SESSION['count'] = 1;
 }
@@ -30,6 +32,7 @@ if(!isset($_SESSION['lastCorrect'])) {
     $_SESSION['lastCorrect'] = "";
 }
 
+// Generate correct number of questions
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if (isset($_POST['questionCount'])) {
@@ -38,6 +41,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         header('location: ../index.php');
         exit;
     }
+
+    //Check for correct answer submission and move count up 1
 
     if (isset($_POST['correct']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
         ++$_SESSION['numCorrect'];
@@ -56,6 +61,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 header('location: ../index.php');
             }
         
+    // Check for incorrect answer submissions
+
     } elseif (isset($_POST['wrong']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
         ++$_SESSION['count'];
 

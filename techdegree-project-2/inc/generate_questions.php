@@ -32,7 +32,9 @@ function randomEquation($questionCount)
                      'firstWrong' => $firstWrong,
                      'secondWrong' => $secondWrong
                 );
-                
+        
+        // Store questions to json file to be retrieved later.
+
         $file = 'questionBank.json';
         $questionBank[] = $formula;
         

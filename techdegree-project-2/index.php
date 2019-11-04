@@ -6,8 +6,6 @@ if (empty($count)) {
     $count = 1;
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +20,7 @@ if (empty($count)) {
 <body>
     <div class="container">
     <div id="quiz-box">
-        <?php 
-        if(empty($_SESSION['questionCount'])) {
-            ?>
+        <?php  if(empty($_SESSION['questionCount'])) { ?>
             
             <form action="inc/quiz.php" method="post">
                 <p class="breadcrumbs">How many questions would you like to answer?</p>
@@ -32,15 +28,17 @@ if (empty($count)) {
                 <input type="submit" class="btn" name="questionCount" value="5" />
                 <input type="submit" class="btn" name="questionCount" value="10" />
             </form>
-            <?php
-        } else {
-            
-            $totalQuestions = $_SESSION['questionCount'];
+
+            <?php } else {
+
+                    $totalQuestions = $_SESSION['questionCount'];
+
                 ?>
-            <p class="breadcrumbs"><?php echo "Question " . $_SESSION['count'] . " of " . $totalQuestions; ?> </p>
+
+                 <p class="breadcrumbs"><?php echo "Question " . $_SESSION['count'] . " of " . $totalQuestions; ?> </p>
                  <p class="quiz">What is <?php echo $quiz[$_SESSION['count']-1]->x; ?> + <?php echo $quiz[$_SESSION['count']-1]->y; ?>?</p>
                  <form action="inc/quiz.php" method="post">
-                     <input type="hidden" name="id" value="0" />
+                    <input type="hidden" name="id" value="0" />
 
                     <?php
                         $options = array(0,1,2);
@@ -68,7 +66,7 @@ if (empty($count)) {
                         }
                     
                     ?>
-                    
+
                     </form>
                     <div class="toast">
                         <?php
@@ -80,8 +78,6 @@ if (empty($count)) {
                                     echo 'Sorry the last answer was incorrect!';
                                 }
                             }
-
-
 
                         ?>
                     </div>
