@@ -1,0 +1,37 @@
+[
+    {
+        "x": 50,
+        "y": 94,
+        "correctAnswer": 144,
+        "firstWrong": 135,
+        "secondWrong": 138
+    },
+    {
+        "x": 59,
+        "y": 51,
+        "correctAnswer": 110,
+        "firstWrong": 117,
+        "secondWrong": 117
+    },
+    {
+        "x": 11,
+        "y": 54,
+        "correctAnswer": 65,
+        "firstWrong": 66,
+        "secondWrong": 73
+    },
+    {
+        "x": 81,
+        "y": 93,
+        "correctAnswer": 174,
+        "firstWrong": 165,
+        "secondWrong": 168
+    },
+    {
+        "x": 90,
+        "y": 43,
+        "correctAnswer": 133,
+        "firstWrong": 143,
+        "secondWrong": 136
+    }
+]
