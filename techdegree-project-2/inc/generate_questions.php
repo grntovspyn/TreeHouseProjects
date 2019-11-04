@@ -39,7 +39,7 @@ function randomEquation($questionCount)
         $questionBank[] = $formula;
         
         $json = json_encode($questionBank, JSON_PRETTY_PRINT);
-        $fp = fopen($file, 'w');
+        $fp = fopen($file, 'w'); // This will overwrite all previous questions creating a new quiz every time
         fwrite($fp, $json);
         fclose($fp);
         $i++;
