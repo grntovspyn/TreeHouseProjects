@@ -68,8 +68,23 @@ if (empty($count)) {
                         }
                     
                     ?>
-                        <a class="btn" href="inc/endsession.php">Start Over</a>
+                    
                     </form>
+                    <div class="toast">
+                        <?php
+
+                            if (1 != $_SESSION['count']) {
+                                if (true == $_SESSION['lastCorrect']) {
+                                    echo 'You got the last answer correct!';
+                                } else {
+                                    echo 'Sorry the last answer was incorrect!';
+                                }
+                            }
+
+
+
+                        ?>
+                    </div>
             <?php } ?>
  
         </div>

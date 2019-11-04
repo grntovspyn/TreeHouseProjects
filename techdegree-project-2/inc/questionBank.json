@@ -1,37 +1,37 @@
 [
     {
-        "x": 50,
-        "y": 94,
-        "correctAnswer": 144,
-        "firstWrong": 135,
-        "secondWrong": 138
+        "x": 19,
+        "y": 89,
+        "correctAnswer": 108,
+        "firstWrong": 112,
+        "secondWrong": 111
     },
     {
-        "x": 59,
-        "y": 51,
-        "correctAnswer": 110,
-        "firstWrong": 117,
-        "secondWrong": 117
+        "x": 30,
+        "y": 47,
+        "correctAnswer": 77,
+        "firstWrong": 79,
+        "secondWrong": 69
     },
     {
-        "x": 11,
-        "y": 54,
-        "correctAnswer": 65,
-        "firstWrong": 66,
-        "secondWrong": 73
+        "x": 28,
+        "y": 17,
+        "correctAnswer": 45,
+        "firstWrong": 49,
+        "secondWrong": 50
     },
     {
-        "x": 81,
-        "y": 93,
+        "x": 86,
+        "y": 88,
         "correctAnswer": 174,
-        "firstWrong": 165,
-        "secondWrong": 168
+        "firstWrong": 166,
+        "secondWrong": 173
     },
     {
-        "x": 90,
-        "y": 43,
-        "correctAnswer": 133,
-        "firstWrong": 143,
-        "secondWrong": 136
+        "x": 85,
+        "y": 99,
+        "correctAnswer": 184,
+        "firstWrong": 174,
+        "secondWrong": 176
     }
 ]

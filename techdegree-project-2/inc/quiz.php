@@ -26,6 +26,10 @@ if(!isset($_SESSION['numCorrect'])) {
     $_SESSION['numCorrect'] = 0;
 }
 
+if(!isset($_SESSION['lastCorrect'])) {
+    $_SESSION['lastCorrect'] = "";
+}
+
 
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if (isset($_POST['questionCount'])) {
@@ -38,6 +42,14 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if (isset($_POST['correct']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
         ++$_SESSION['numCorrect'];
         ++$_SESSION['count'];
+
+            if(isset($_SESSION['lastCorrect'])) {
+                $_SESSION['lastCorrect'] = true;
+            } else {
+                $_SESSION['lastCorrect'] = "";
+            }
+
+
             if($_SESSION['count'] > $_SESSION['questionCount']){
                 header('location: ../finalscore.php');
             } else {
@@ -46,6 +58,14 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         
     } elseif (isset($_POST['wrong']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
         ++$_SESSION['count'];
+
+        if(isset($_SESSION['lastCorrect'])) {
+            $_SESSION['lastCorrect'] = false;
+        } else {
+            $_SESSION['lastCorrect'] = "";
+        }
+
+
             if($_SESSION['count'] > $_SESSION['questionCount']){
                 header('location: ../finalscore.php');
             } else {
