@@ -73,9 +73,9 @@ if (empty($count)) {
 
                             if (1 != $_SESSION['count']) {
                                 if (true == $_SESSION['lastCorrect']) {
-                                    echo 'You got the last answer correct!';
+                                    echo "<p class='true'>You got the last answer correct!</p>";
                                 } else {
-                                    echo 'Sorry the last answer was incorrect!';
+                                    echo "<p class='false'>Sorry the last answer was incorrect!</p>";
                                 }
                             }
 
