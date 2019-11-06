@@ -1,72 +1,72 @@
 [
     {
-        "x": 65,
-        "y": 94,
-        "correctAnswer": 159,
-        "firstWrong": 167,
-        "secondWrong": 156
+        "x": 33,
+        "y": 77,
+        "correctAnswer": 110,
+        "firstWrong": 106,
+        "secondWrong": 119
     },
     {
-        "x": 59,
+        "x": 28,
+        "y": 89,
+        "correctAnswer": 117,
+        "firstWrong": 115,
+        "secondWrong": 114
+    },
+    {
+        "x": 81,
         "y": 86,
-        "correctAnswer": 145,
-        "firstWrong": 151,
-        "secondWrong": 146
+        "correctAnswer": 167,
+        "firstWrong": 161,
+        "secondWrong": 168
     },
     {
-        "x": 89,
-        "y": 95,
-        "correctAnswer": 184,
-        "firstWrong": 178,
-        "secondWrong": 178
+        "x": 36,
+        "y": 78,
+        "correctAnswer": 114,
+        "firstWrong": 113,
+        "secondWrong": 105
     },
     {
-        "x": 14,
-        "y": 84,
-        "correctAnswer": 98,
-        "firstWrong": 108,
-        "secondWrong": 89
-    },
-    {
-        "x": 17,
-        "y": 50,
-        "correctAnswer": 67,
-        "firstWrong": 76,
-        "secondWrong": 65
-    },
-    {
-        "x": 87,
-        "y": 88,
-        "correctAnswer": 175,
-        "firstWrong": 176,
-        "secondWrong": 167
-    },
-    {
-        "x": 49,
-        "y": 96,
-        "correctAnswer": 145,
-        "firstWrong": 138,
-        "secondWrong": 152
-    },
-    {
-        "x": 37,
-        "y": 40,
-        "correctAnswer": 77,
-        "firstWrong": 80,
-        "secondWrong": 87
-    },
-    {
-        "x": 42,
-        "y": 94,
-        "correctAnswer": 136,
-        "firstWrong": 131,
-        "secondWrong": 134
-    },
-    {
-        "x": 62,
-        "y": 29,
+        "x": 20,
+        "y": 71,
         "correctAnswer": 91,
-        "firstWrong": 101,
-        "secondWrong": 81
+        "firstWrong": 94,
+        "secondWrong": 99
+    },
+    {
+        "x": 48,
+        "y": 56,
+        "correctAnswer": 104,
+        "firstWrong": 95,
+        "secondWrong": 103
+    },
+    {
+        "x": 61,
+        "y": 37,
+        "correctAnswer": 98,
+        "firstWrong": 104,
+        "secondWrong": 99
+    },
+    {
+        "x": 74,
+        "y": 68,
+        "correctAnswer": 142,
+        "firstWrong": 148,
+        "secondWrong": 140
+    },
+    {
+        "x": 96,
+        "y": 62,
+        "correctAnswer": 158,
+        "firstWrong": 159,
+        "secondWrong": 150
+    },
+    {
+        "x": 93,
+        "y": 57,
+        "correctAnswer": 150,
+        "firstWrong": 146,
+        "secondWrong": 153
     }
 ]

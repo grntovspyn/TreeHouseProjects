@@ -41,6 +41,13 @@ if (empty($count)) {
                     <input type="hidden" name="id" value="0" />
 
                     <?php
+
+                        /*  
+                        *   The options array holds the keys for the switch statement. I shuffle the keys and loops through the switch statement the same 
+                        *   amount of times as there are keys. With the array shuffled the order of the switch statements changes everytime but it makes sure to hit 
+                        *   each case so all three answers are still displayed. 
+                        */
+
                         $options = array(0,1,2);
                         $x = 1;
                         while ($x <= count($options)) {
@@ -73,7 +80,7 @@ if (empty($count)) {
 
                             if (1 != $_SESSION['count']) {
                                 if (true == $_SESSION['lastCorrect']) {
-                                    echo "<p class='true'>You got the last answer correct!</p>";
+                                    echo "<p class='true'>Your last answer of " .  $quiz[$_SESSION['count']-2]->correctAnswer . " was correct!</p>";
                                 } else {
                                     echo "<p class='false'>Sorry the last answer was incorrect!</p>";
                                 }

@@ -16,7 +16,7 @@ function randomEquation($questionCount)
 
         // Make sure it is a unique answer
 
-        while ($correctAnswer == $firstWrong || $correctAnswer == $secondWrong) {
+        while ($correctAnswer == $firstWrong || $correctAnswer == $secondWrong || $firstWrong == $secondWrong ) {
             $firstWrong = $correctAnswer + rand(-10, 10);
             $secondWrong = $correctAnswer + rand(-10, 10);
 
