@@ -50,7 +50,7 @@ if (empty($count)) {
                     <input type="hidden" name="id" value="0" />
 
                     <?php
-                        //Shuffle the answers to button 1 isn't always the correct answqer
+                        //Shuffle the answers so button 1 isn't always the correct answqer
 
                         $answers = array(
                             $quiz[$_SESSION['count']-1]->correctAnswer,
