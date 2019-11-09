@@ -18,6 +18,8 @@ session_start();
 // Include questions
 include ('generate_questions.php');
 
+$quiz = json_decode(file_get_contents("questionBank.json"));
+
 // Set session indexes that will be used to avoid warning messages
 
 if(!isset($_SESSION['count'])) {
@@ -42,45 +44,27 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         exit;
     }
 
-    //Check for correct answer submission and move count up 1
+    // Check if the answer is the correct one
 
-    if (isset($_POST['correct']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
-        ++$_SESSION['numCorrect'];
-        ++$_SESSION['count'];
-
-            if(isset($_SESSION['lastCorrect'])) {
-                $_SESSION['lastCorrect'] = true;
-            } else {
-                $_SESSION['lastCorrect'] = "";
-            }
-
-
-            if($_SESSION['count'] > $_SESSION['questionCount']){
-                header('location: ../finalscore.php');
-            } else {
-                header('location: ../index.php');
-            }
-        
-    // Check for incorrect answer submissions
-
-    } elseif (isset($_POST['wrong']) and $_SESSION['count'] <= $_SESSION['questionCount']) {
-        ++$_SESSION['count'];
-
-        if(isset($_SESSION['lastCorrect'])) {
-            $_SESSION['lastCorrect'] = false;
+    if (isset($_POST['answer'])) {
+        if ($_POST['answer'] == $quiz[$_SESSION['count'] - 1]->correctAnswer) {
+            ++$_SESSION['numCorrect'];
+            ++$_SESSION['count'];
+            $_SESSION['lastCorrect'] = true;
         } else {
-            $_SESSION['lastCorrect'] = "";
+            ++$_SESSION['count'];
+            $_SESSION['lastCorrect'] = false;
         }
 
-
-            if($_SESSION['count'] > $_SESSION['questionCount']){
+        if($_SESSION['count'] > $_SESSION['questionCount']){
                 header('location: ../finalscore.php');
             } else {
                 header('location: ../index.php');
             }
-    } 
+                
+    }
 }
-
+   
 
 
 // Keep track of which questions have been asked

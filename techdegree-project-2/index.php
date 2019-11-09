@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+//Make sure user is actually starting a new quiz and not browsing back from finalscore.php
+
 if(isset($_SESSION['questionCount']) && $_SESSION['count'] > $_SESSION['questionCount']){
    
         session_destroy();
@@ -47,39 +50,21 @@ if (empty($count)) {
                     <input type="hidden" name="id" value="0" />
 
                     <?php
+                        //Shuffle the answers to button 1 isn't always the correct answqer
 
-                        /*  
-                        *   The options array holds the keys for the switch statement. I shuffle the keys and loops through the switch statement the same 
-                        *   amount of times as there are keys. With the array shuffled the order of the switch statements changes everytime but it makes sure to hit 
-                        *   each case so all three answers are still displayed. 
-                        */
+                        $answers = array(
+                            $quiz[$_SESSION['count']-1]->correctAnswer,
+                            $quiz[$_SESSION['count']-1]->firstWrong,  
+                            $quiz[$_SESSION['count']-1]->secondWrong
+                        );
 
-                        $options = array(0,1,2);
-                        $x = 1;
-                        while ($x <= count($options)) {
-                            shuffle($options);
-                            foreach ($options as $value) {
-                                switch ($value) {
-                        case 0:
-                            ?> <input type="submit" class="btn" name="correct" value=<?php echo $quiz[$_SESSION['count']-1]->correctAnswer; ?> /> <?php
-                            $x++;
-                            break;
-                        case 1:
-                            ?> <input type="submit" class="btn" name="wrong" value=<?php echo $quiz[$_SESSION['count']-1]->firstWrong; ?> /> <?php
-                            $x++;
-                            break;
-                        case 2:
-                            ?> <input type="submit" class="btn" name="wrong" value=<?php echo $quiz[$_SESSION['count']-1]->secondWrong; ?> /> <?php
-                            $x++;
-                            break;
-                        default:
-                            break;
-                                }
-                            }
-                        }
-                    
-                    ?>
+                        shuffle($answers);
+            
+                        ?>
 
+                        <input type="submit" class="btn" name="answer" value=<?php echo $answers[0]; ?> />
+                        <input type="submit" class="btn" name="answer" value=<?php echo $answers[1]; ?> />
+                        <input type="submit" class="btn" name="answer" value=<?php echo $answers[2]; ?> />
                     </form>
                     <div class="toast">
                         <?php
@@ -88,7 +73,7 @@ if (empty($count)) {
                                 if (true == $_SESSION['lastCorrect']) {
                                     echo "<p class='true'>Your last answer of " .  $quiz[$_SESSION['count']-2]->correctAnswer . " was correct!</p>";
                                 } else {
-                                    echo "<p class='false'>Sorry the last answer was incorrect!</p>";
+                                    echo "<p class='false'>Sorry the last answer was incorrect! The correct answer was " . $quiz[$_SESSION['count']-2]->correctAnswer . "</p>";
                                 }
                             }
 

@@ -1,5 +1,8 @@
 <?php 
 session_start();
+
+//Make sure user doesn't browse to this page before starting a quiz
+
 if(!isset($_SESSION['questionCount'])) {
     header("location: inc/endsession.php");
 }
