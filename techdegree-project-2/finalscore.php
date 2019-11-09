@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+if(!isset($_SESSION['questionCount'])) {
+    header("location: inc/endsession.php");
+}
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

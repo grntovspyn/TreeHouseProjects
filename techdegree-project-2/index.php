@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(isset($_SESSION['questionCount']) && $_SESSION['count'] > $_SESSION['questionCount']){
+   
+        session_destroy();
+        session_start();
+    
+}
 $quiz = json_decode(file_get_contents("inc/questionBank.json"));
 
 if (empty($count)) {

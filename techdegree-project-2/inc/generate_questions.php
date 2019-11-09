@@ -26,7 +26,8 @@ function randomEquation($questionCount)
         }
     
         // Add question and answer to questions array
-        $formula = array('x' => $x,
+        $formula = array(
+                     'x' => $x,
                      'y' => $y,
                      'correctAnswer' => $correctAnswer,
                      'firstWrong' => $firstWrong,
@@ -39,7 +40,10 @@ function randomEquation($questionCount)
         $questionBank[] = $formula;
         
         $json = json_encode($questionBank, JSON_PRETTY_PRINT);
-        $fp = fopen($file, 'w'); // This will overwrite all previous questions creating a new quiz every time
+
+        // This will overwrite all previous questions creating a new quiz every time
+
+        $fp = fopen($file, 'w'); 
         fwrite($fp, $json);
         fclose($fp);
         $i++;

@@ -1,72 +1,37 @@
 [
     {
-        "x": 33,
-        "y": 77,
-        "correctAnswer": 110,
-        "firstWrong": 106,
-        "secondWrong": 119
-    },
-    {
-        "x": 28,
-        "y": 89,
-        "correctAnswer": 117,
+        "x": 35,
+        "y": 74,
+        "correctAnswer": 109,
         "firstWrong": 115,
-        "secondWrong": 114
+        "secondWrong": 108
     },
     {
-        "x": 81,
-        "y": 86,
-        "correctAnswer": 167,
-        "firstWrong": 161,
-        "secondWrong": 168
+        "x": 77,
+        "y": 99,
+        "correctAnswer": 176,
+        "firstWrong": 185,
+        "secondWrong": 170
     },
     {
-        "x": 36,
-        "y": 78,
-        "correctAnswer": 114,
-        "firstWrong": 113,
+        "x": 26,
+        "y": 11,
+        "correctAnswer": 37,
+        "firstWrong": 27,
+        "secondWrong": 31
+    },
+    {
+        "x": 18,
+        "y": 95,
+        "correctAnswer": 113,
+        "firstWrong": 121,
         "secondWrong": 105
     },
     {
-        "x": 20,
-        "y": 71,
-        "correctAnswer": 91,
-        "firstWrong": 94,
-        "secondWrong": 99
-    },
-    {
-        "x": 48,
-        "y": 56,
-        "correctAnswer": 104,
-        "firstWrong": 95,
-        "secondWrong": 103
-    },
-    {
-        "x": 61,
-        "y": 37,
-        "correctAnswer": 98,
-        "firstWrong": 104,
-        "secondWrong": 99
-    },
-    {
-        "x": 74,
-        "y": 68,
-        "correctAnswer": 142,
-        "firstWrong": 148,
-        "secondWrong": 140
-    },
-    {
-        "x": 96,
-        "y": 62,
-        "correctAnswer": 158,
-        "firstWrong": 159,
-        "secondWrong": 150
-    },
-    {
-        "x": 93,
-        "y": 57,
-        "correctAnswer": 150,
-        "firstWrong": 146,
-        "secondWrong": 153
+        "x": 16,
+        "y": 58,
+        "correctAnswer": 74,
+        "firstWrong": 73,
+        "secondWrong": 76
     }
 ]
