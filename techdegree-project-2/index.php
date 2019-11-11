@@ -45,16 +45,16 @@ if (empty($count)) {
                 ?>
 
                  <p class="breadcrumbs"><?php echo "Question " . $_SESSION['count'] . " of " . $totalQuestions; ?> </p>
-                 <p class="quiz">What is <?php echo $quiz[$_SESSION['count']-1]->x; ?> + <?php echo $quiz[$_SESSION['count']-1]->y; ?>?</p>
+                 <p class="quiz">What is <?php echo $quiz[$_SESSION['count']-1]->x; ?> + <?php echo $quiz[$_SESSION['count']-1]->y; ?>? </p>
                  <form action="inc/quiz.php" method="post">
                     <input type="hidden" name="id" value="0" />
 
                     <?php
-                        //Shuffle the answers so button 1 isn't always the correct answqer
+                        //Shuffle the answers so button 1 isn't always the correct answer
 
                         $answers = array(
                             $quiz[$_SESSION['count']-1]->correctAnswer,
-                            $quiz[$_SESSION['count']-1]->firstWrong,  
+                            $quiz[$_SESSION['count']-1]->firstWrong,
                             $quiz[$_SESSION['count']-1]->secondWrong
                         );
 
