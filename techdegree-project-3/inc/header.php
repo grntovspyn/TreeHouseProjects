@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="./css/site.css">
     </head>
     <body>
         <header>

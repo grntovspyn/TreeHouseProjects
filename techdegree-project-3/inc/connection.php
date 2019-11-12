@@ -8,6 +8,7 @@ try {
 
 } catch(Exception $e) {
     echo "Unable to connect to database" . $e->getMessage();
+    die();
 }
 
 ?>

@@ -36,6 +36,8 @@ footer {
 
 
 
+
+
 /* ==========================================================================
    Button Styles
    ========================================================================== */
@@ -78,6 +80,20 @@ footer {
 	outline: 0;
 }
 
+.button2 {
+	padding: 8px 10px 6px 10px;
+	background: red;
+	border: 2px solid #678f89;
+	border-radius: 4px;
+	text-decoration: none;
+	color: white;
+	position: relative;
+	text-align: center;
+	font-size: 14px;
+	float:right;
+	position:relative;
+	bottom: 35px;
+}
 
 
 /* ==========================================================================
@@ -182,6 +198,11 @@ ul li a {
 	font-size: 18px;
 }
 
+#mess {
+	
+	margin: auto 250px;
+	
+}
 
 
 /* ==========================================================================
