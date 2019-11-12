@@ -4,7 +4,7 @@
         include ("connection.php");
     
         try {
-            $sql = "SELECT * FROM entries";
+            $sql = "SELECT * FROM entries ORDER BY date DESC";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
