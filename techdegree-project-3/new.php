@@ -10,7 +10,7 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
     $time_spent = filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING);
     $learned = filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING);
     $resources = filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING);
-    if(new_entry($title, $date, $time_spent, $learned, $resources)){
+    if(create_entry($title, $date, $time_spent, $learned, $resources)){
         $message = "New entry successfully posted.";
     } else {
         $message = "Unable to post entry";

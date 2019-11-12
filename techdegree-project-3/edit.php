@@ -32,7 +32,7 @@ $time_spent = filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING);
 $learned = filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING);
 $resources = filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING);
 
-if(edit_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)){
+if(updatet_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)){
     $message = "Entry Successfully Updated!";
 } else {
     $message = "Unable to update entry";
