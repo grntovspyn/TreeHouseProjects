@@ -19,7 +19,7 @@ if (isset($editEntry)) {
     $title = htmlspecialchars($editEntry['title']);
     $date = htmlspecialchars($editEntry['date']);
     $time_spent = htmlspecialchars($editEntry['time_spent']);
-    $learned = htmlspecialchars($editEntry['learned']);
+    $learned = htmlspecialchars_decode($editEntry['learned']);
     $resources = htmlspecialchars($editEntry['resources']);
 }
 if('POST' == $_SERVER['REQUEST_METHOD']) {
@@ -32,7 +32,7 @@ $time_spent = filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING);
 $learned = filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING);
 $resources = filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING);
 
-if(updatet_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)){
+if(update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)){
     $message = "Entry Successfully Updated!";
 } else {
     $message = "Unable to update entry";

@@ -6,7 +6,8 @@
 
 body {
 	font-size: 16px;
-	color: #404a49;
+	background-color: #353535;
+	color: #FFFFFF;
 	font-family: 'Cousine', serif;
 	font-weight: 400;
 }
@@ -14,12 +15,29 @@ body {
 	margin: 0 auto;
 	padding: 0 25px;
 }
+
+.wrap {
+	width: 1000px;
+	border-radius:10px;
+	background-color: beige;
+	margin:auto;
+	
+}
+
+.title {
+	display:block;
+	margin: 50px auto;
+	width: 33%;
+	text-align:center;
+	display:block;
+}
+
 header .site-header {
 	margin: 0 auto;
 	height: 95px;
 }
 header .logo i {
-	color: #678f89;
+	color: #3C6E71;
 	margin: 20px 0 0 -5px;
 	float: left;
 	font-size: 40px;
@@ -31,7 +49,7 @@ header .button {
 footer {
 	text-align: center;
 	padding: 35px 0;
-	border-top: 2px dotted #678f89;
+	border-top: 2px dotted #3C6E71;
 }
 
 
@@ -44,7 +62,7 @@ footer {
 
 .button {
 	padding: 8px 10px 6px 10px;
-	background: #678f89;
+	background: #3C6E71;
 	border: 2px solid #678f89;
 	border-radius: 4px;
 	text-decoration: none;
@@ -59,8 +77,10 @@ footer {
 	color: #404a49;
 }
 .button.icon-right {
+
 	padding-right: 30px;
-	top: -10px;
+	top: -120px;
+	display:block;
 }
 .button.icon-left {
 	padding-left: 30px;
@@ -106,7 +126,7 @@ h3 {
 	margin: 0;
 	font-weight: 400;
 	line-height: 1em;
-	color: #000;
+	color: #ADD9F4;
 }
 h1 {
 	font-size: 44px;
@@ -117,7 +137,7 @@ h2 {
 }
 h2 a {
 	text-decoration: none;
-	color: #000;
+	color: #ADD9F4;
 }
 h3 {
 	font-size: 18px;
@@ -130,9 +150,9 @@ p {
 	font-size: 18px;
 }
 p a {
-	border-bottom: 2px solid #678f89;
+	border-bottom: 2px solid #468C98;
 	padding: 0;
-	color: #678f89;
+	color: #468C98;
 	text-decoration: none;
 }
 ul li {
@@ -151,7 +171,11 @@ ul li a {
 /* ==========================================================================
    Page Styles
    ========================================================================== */
-
+article {
+	background-color: #284B63;
+	padding: 25px 0;
+	border-radius: 15px;
+}
 .entry-list,
 .edit-entry,
 .new-entry {
@@ -181,7 +205,7 @@ ul li a {
 }
 .entry {
 	max-width: 800px;
-	margin: 75px auto 0 auto;
+	margin: 75px 20px 0 20px;
 	text-align: left;
 }
 .entry p {
@@ -210,6 +234,8 @@ ul li a {
    ========================================================================== */
 
 
+	
+
 form label {
 	display: block;
 	margin-bottom: 8px;
@@ -218,7 +244,8 @@ form input[type=text],
 form input[type=password],
 form input[type=date],
 form textarea {
-	border: 2px solid #e1e1e1;
+	background-color: #284B63;
+	border: 2px solid #ADD9F4;
 	font-size: 18px;
 	line-height: 1.8em;
 	padding:10px 13px;
