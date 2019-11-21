@@ -11,7 +11,7 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
         header('location: index.php');
     }
     $editEntry = get_entry_by_id($entryId);
-    $tags = get_tags_by_entry_id($entryId);
+    $tags = get_tags();
     
 }
 
@@ -34,6 +34,7 @@ if (isset($editEntry)) {
                 <div class="edit-entry">
                 <div id="mess"><?php echo $message;?></div>
                     <h2>Edit Entry</h2>
+                    
                     <form method="post" action="inc/editentry.php?id=<?php echo $entryId;?>">
                         <input type="hidden" name="id" value="<?php echo $entryId;?>">
                         <label for="title"> Title</label>
@@ -47,30 +48,38 @@ if (isset($editEntry)) {
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="resources"><?php echo $resources;?></textarea>
                         
-                        <input type="submit" value="Update Entry" class="button">
+                        <input type="submit" name="update" value="Update Entry" class="button">
+                        <input type="submit" name="delete" value="Delete Entry" class="button2">
                    
                     </form>
+                   
+                   
                     <br>
                     <form method="post" action="inc/edittags.php">
                         
                     <label for="tags">Select which tags to use</label>
                     <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
-                        <fieldset class="checkbox" >
+                        <fieldset form="delTags" class="checkbox" >
                         
                         <?php foreach($tags as $tag){
                             echo "<input type=\"checkbox\" name=\"tagId[]\" value=" . $tag['id'] . "> " . $tag['tags'] . "<br>";
-                        }
+                          
+                        } 
                         ?>
                        
                          </fieldset>
                          
-                        <label for="newTag">Add a new tag</label>
+                        <input type="submit" name="update" value="Updated Selected Tags" class="button">
+                        <input type="submit" name="delete" value="Delete Selected Tags" class="button2">
+                    </form>
+                   
+
+                    <br>
+                    <form method="post" action="inc/newtag.php">
+                    <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
+                    <label for="newTag">Add a new tag</label>
                         <input type="text" id="newTag" name="newTag">
                         <input type="submit" value="Add New Tag" class="button">
-                    </form>
-                    <form action="inc/delete_entry.php" method="post" onsubmit="return confirm('Are you sure you want to delete?')">
-                    <input type="hidden" name="id" value="<?php echo $entryId; ?>">
-                    <input type="submit" value="Delete Entry" class="button2">
                     </form>
                 </div>
             </div>

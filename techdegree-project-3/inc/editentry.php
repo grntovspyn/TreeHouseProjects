@@ -9,14 +9,19 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
-    $formattedTags = trim(filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING));
-    echo "<pre>";
-    var_dump($_POST);
-    echo "</pre>";
-    // if (update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)) {
-    //     header('location: ../edit.php?id='.$id);
-    // } else {
-    //     echo 'something failes';
-    // }
+  
+    if (isset($_POST['update'])) {
+        if (update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)) {
+            header('location: ../edit.php?id='.$id);
+        } else {
+            echo 'something failes';
+        }
+    } else if (isset($_POST['delete'])) {
+    if(delete_entry($id)){
+        header("location: ../index.php");
+    } else {
+        echo "Unable to delete";
+    }
+    }
 }
 ?>

@@ -204,25 +204,16 @@ function get_tags_by_entry_id($entries_id){
 
 }
 
-function create_tags_by_entry_id($entries_id, $tags) {
+function get_tags() {
     include ("connection.php");
 
-
     try {
-        $sql = "INSERT INTO tags (entries_id, tags) VALUES (:entries_id, :tags) ";
+        $sql = "SELECT * FROM TAGS";
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':entries_id',$entries_id,PDO::PARAM_INT);
-        $stmt->bindParam(':tags',$tags,PDO::PARAM_STR);
         $stmt->execute();
-
-    if($stmt->rowCount() == 1){
-        return true;
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-    } else {
-        
-        return false;
-        
-    }
+        return $results;
 
     } catch (Exception $e) {
         echo "Unable to query DB" . $e->getMessage();
@@ -231,63 +222,23 @@ function create_tags_by_entry_id($entries_id, $tags) {
 
 }
 
-function update_tags_by_entry_id($entries_id, $tags){
-
-    include ("connection.php");
-    $set = "";
-    for($i = 1; $i <= count($tags); $i++) {
-        $set .= "tags = :tags" . $i . ", ";
-        
-    }
-    $set = substr($set, 0, -1);
-    try {
-    $sql = "UPDATE tags SET ";
-    $sql .= $set;
-    $sql .= " WHERE id = :entries_id";
-    echo $sql;
-    $stmt = $db->prepare($sql);
-    for ($i = 1; $i <= count($tags); ++$i) {
-        $stmt->bindParam(':tags' . $i, $tags[$i-1], PDO::PARAM_STR);
-    }
-    $stmt->bindParam(':entries_id',$entries_id,PDO::PARAM_INT);
-    $stmt->execute();
-
-    if($stmt->rowCount() == 1){
-        return true;
-        
-    } else {
-        
-        return false;
-        
-    }
-
-} catch (Exception $e) {
-    echo "Unable to query DB" . $e->getMessage();
-    die();
-}
-
-
-}
     
 function delete_tags($tag){
 
     include ("connection.php");
     
     try {
-        $sql = "DELETE FROM tags WHERE tags = :tag";
+        $sql = "DELETE FROM tags WHERE id = :tagId";
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id',$tag,PDO::PARAM_STR);
+        $stmt->bindParam("tagId",$tag,PDO::PARAM_INT);
         $stmt->execute();
 
-        
-        if($stmt->rowCount() == 1){
+        if($stmt->rowCount() >= 1){
             return true;
-            
         } else {
-            
             return false;
-            
         }
+
 
     } catch (Exception $e) {
         echo "Unable to query DB" . $e->getMessage();
@@ -297,27 +248,60 @@ function delete_tags($tag){
 }
 
 
-function insert_into_tags($entries_id, $tags){
+function delete_tag_mapping($entryId){
     include ("connection.php");
 
-    $sql = "INSERT INTO tags (entries_id, tags) VALUES (:entries_id, :tags)";
+
 
     try {
+        $sql = 'DELETE FROM entry_tags WHERE entry_id = :entry_id';
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':entries_id', $entries_id, PDO::PARAM_INT);
-        $stmt->bindParam(':tags', $tags, PDO::PARAM_STR);
+        $stmt->bindParam('entry_id',$entryId, PDO::PARAM_INT);
         $stmt->execute();
 
-        if (1 == $stmt->rowCount()) {
-            return  true;
+        if($stmt->rowCount() >= 1){
+            return true;
+        } else {
+            return false;
         }
 
-        return false;
     } catch(Exception $e) {
-        echo "Unable to insert into DB" . $e->getMessage();
+        "Unable to query DB" . $e->getMessage();
     }
 
+
 }
+
+function create_new_tag_mapping($entryId,$tagId) {
+    include ("connection.php");
+
+
+    try {
+        foreach($tagId as $tId)
+        $sql = "INSERT INTO entry_tags (entry_id, tag_id) VALUES (:entryId, :tagId)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("entryId",$entryId,PDO::PARAM_INT);
+        $stmt->bindParam("tagId",$tId,PDO::PARAM_INT);
+        $stmt->execute();
+
+        if($stmt->rowCount() >= 1){
+            return true;
+        } else {
+            return false;
+        }
+
+
+    } catch (Exception $e) {
+        "Unable to query DB" . $e->getMessage();
+    }
+
+    }
+
+
+
+
+
+
 
 
 ?>
