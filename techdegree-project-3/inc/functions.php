@@ -1,5 +1,54 @@
 <?php
 
+
+function create_new_tag($entryId, $tag)
+{
+    include 'connection.php';
+
+    try {
+        $sql = 'INSERT INTO tags (tags) VALUES (:tag);';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tag', $tag, PDO::PARAM_STR);
+        $stmt->execute();
+        $tag_id = $db->lastInsertId();
+        if (1 == $stmt->rowCount()) {
+            if (map_entry_to_tags($entryId, $tag_id)) {
+                return true;
+            }
+
+            return false;
+        }
+    } catch(Exception $e) {
+        echo "Unable to insert" . $e->getMessage();
+    }
+}
+
+function map_entry_to_tags($entry_id, $tag_id)
+
+{
+    include 'connection.php';
+
+
+    try {
+        $sql = 'INSERT INTO entry_tags (entry_id, tag_id) VALUES (:entry_id, :tag_id);';
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':entry_id', $entry_id, PDO::PARAM_INT);
+        $stmt->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if (1 == $stmt->rowCount()) {
+            return true;
+        }
+
+        return false;
+    } catch (Exception $e) {
+        echo "Unable to map tags" . $e->getMessage();
+    }
+}
+
+
+
 function get_entry(){
     include ("connection.php");
 
@@ -37,6 +86,7 @@ function get_entry_by_id($id){
 
 }
 
+
 function create_entry($title, $date, $time_spent, $learned, $resources) {
     include ("connection.php");
     
@@ -67,10 +117,10 @@ function create_entry($title, $date, $time_spent, $learned, $resources) {
 
 }
 
-
 function update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources){
     include ("connection.php");
-        
+    
+
     try {
         $sql = "UPDATE entries SET title = :title, date = :date, time_spent = :time_spent, learned = :learned, resources = :resources WHERE id = :id";
         $stmt = $db->prepare($sql);
@@ -88,13 +138,17 @@ function update_entry_by_id($id, $title, $date, $time_spent, $learned, $resource
         } else {
             
             return false;
-    
+            
         }
-        
-    } catch(Exception $e) {
-        echo "Unable to update DB" . $e->getMessage();
-        die(); 
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
     }
+
+
+    
+
 
 }
 
@@ -131,7 +185,7 @@ function get_tags_by_entry_id($entries_id){
 
 
     try {
-    $sql = "SELECT tags FROM tags WHERE entries_id = :entries_id";
+    $sql = "SELECT tags.id, tags.tags FROM tags JOIN entry_tags ON tags.id = entry_tags.tag_id WHERE entry_tags.entry_id = :entries_id";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':entries_id',$entries_id,PDO::PARAM_INT);
     $stmt->execute();
@@ -177,16 +231,25 @@ function create_tags_by_entry_id($entries_id, $tags) {
 
 }
 
-function update_tags_by_entry_id($entires_id, $tags){
+function update_tags_by_entry_id($entries_id, $tags){
 
     include ("connection.php");
-
-
+    $set = "";
+    for($i = 1; $i <= count($tags); $i++) {
+        $set .= "tags = :tags" . $i . ", ";
+        
+    }
+    $set = substr($set, 0, -1);
     try {
-    $sql = "UPDATE tags SET entries_id = :entries_id, tags = :tags ";
+    $sql = "UPDATE tags SET ";
+    $sql .= $set;
+    $sql .= " WHERE id = :entries_id";
+    echo $sql;
     $stmt = $db->prepare($sql);
+    for ($i = 1; $i <= count($tags); ++$i) {
+        $stmt->bindParam(':tags' . $i, $tags[$i-1], PDO::PARAM_STR);
+    }
     $stmt->bindParam(':entries_id',$entries_id,PDO::PARAM_INT);
-    $stmt->bindParam(':tags',$tags,PDO::PARAM_STR);
     $stmt->execute();
 
     if($stmt->rowCount() == 1){
@@ -233,6 +296,28 @@ function delete_tags($tag){
 
 }
 
+
+function insert_into_tags($entries_id, $tags){
+    include ("connection.php");
+
+    $sql = "INSERT INTO tags (entries_id, tags) VALUES (:entries_id, :tags)";
+
+    try {
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':entries_id', $entries_id, PDO::PARAM_INT);
+        $stmt->bindParam(':tags', $tags, PDO::PARAM_STR);
+        $stmt->execute();
+
+        if (1 == $stmt->rowCount()) {
+            return  true;
+        }
+
+        return false;
+    } catch(Exception $e) {
+        echo "Unable to insert into DB" . $e->getMessage();
+    }
+
+}
 
 
 ?>

@@ -234,7 +234,16 @@ article {
    ========================================================================== */
 
 
-	
+.checkbox {
+	background-color: #284B63;
+	border: 2px solid #ADD9F4;
+	font-size: 18px;
+	line-height: 1.8em;
+	padding:10px 13px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+	width: calc(100% - 32px);
+}	
 
 form label {
 	display: block;
