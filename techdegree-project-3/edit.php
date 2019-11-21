@@ -38,13 +38,13 @@ if (isset($editEntry)) {
                     <form method="post" action="inc/editentry.php?id=<?php echo $entryId;?>">
                         <input type="hidden" name="id" value="<?php echo $entryId;?>">
                         <label for="title"> Title</label>
-                        <input id="title" type="text" name="title" value="<?php echo $title;?>"><br>
+                        <input id="title" type="text" name="title" value="<?php echo $title;?>" required><br>
                         <label for="date">Date</label>
-                        <input id="date" type="date" name="date" value="<?php echo $date;?>"><br>
+                        <input id="date" type="date" min="1999-01-01" max="<?php echo date("Y-m-d"); ?>" name="date" value="<?php echo $date;?>" required><br>
                         <label for="time_spent"> Time Spent</label>
-                        <input id="time_spent" type="text" name="time_spent" value="<?php echo $time_spent;?>"><br>
+                        <input id="time_spent" type="text" name="time_spent" value="<?php echo $time_spent;?>" required><br>
                         <label for="what-i-learned">What I Learned</label>
-                        <textarea id="what-i-learned" rows="5" name="learned"><?php echo $learned;?></textarea>
+                        <textarea id="what-i-learned" rows="5" name="learned" required><?php echo $learned;?></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="resources"><?php echo $resources;?></textarea>
                         

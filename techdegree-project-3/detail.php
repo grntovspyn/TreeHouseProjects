@@ -49,7 +49,7 @@ $currentEntry = get_entry_by_id($entryId);
                                   echo "<p>";
                                   $tags = array_column($tags, "tags");
                                   foreach($tags as $tag){
-                                      echo "#" . $tag . " ";
+                                      echo "<a class='taglink' href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
                                   }
                                   echo "</p>";
                               }

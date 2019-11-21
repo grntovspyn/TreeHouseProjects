@@ -39,13 +39,13 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
                     <h2>New Entry</h2>
                     <form method="post" action="new.php">
                         <label for="title" > Title</label>
-                        <input id="title" type="text" name="title"><br>
+                        <input id="title" type="text" name="title" required><br>
                         <label for="date">Date</label>
-                        <input id="date" type="date" name="date"><br>
+                        <input id="date" type="date" min="1995-01-01" max="<?php echo date("Y-m-d"); ?>" name="date" required><br>
                         <label for="time-spent"> Time Spent</label>
-                        <input id="time-spent" type="text" name="time_spent"><br>
+                        <input id="time-spent" type="text" name="time_spent" required><br>
                         <label for="what-i-learned">What I Learned</label>
-                        <textarea id="what-i-learned" rows="5" name="learned"></textarea>
+                        <textarea id="what-i-learned" rows="5" name="learned" required></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="resources"></textarea>
                         <label for="tags">Select which tags to use</label>
