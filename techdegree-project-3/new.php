@@ -1,6 +1,7 @@
 <?php include ("inc/header.php"); ?>
 
 <?php
+$tags = get_tags();
 $message = "";
 if('POST' == $_SERVER['REQUEST_METHOD']) {
     if(!empty($_POST['title']) && !empty($_POST['date']) && !empty($_POST['time_spent']) && !empty($_POST['learned'])) {
@@ -44,8 +45,25 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
                         <textarea id="what-i-learned" rows="5" name="learned"></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="resources"></textarea>
+                        <label for="tags">Select which tags to use</label>
+                    <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
+                        <fieldset form="delTags" class="checkbox" >
+                        
+                        <?php foreach($tags as $tag){
+                            echo "<input type=\"checkbox\" name=\"tagId[]\" value=" . $tag['id'] . "> " . $tag['tags'] . "<br>";
+                          
+                        } 
+                        ?>
+                       
+                         </fieldset>
                         <input type="submit" value="Publish Entry" class="button">
-                        <!-- <a href="index.php" class="button button-secondary">Cancel</a> -->
+                        
+                    </form>
+                    <form method="post" action="inc/newtag.php">
+                    <input type="hidden" name="entryId" value="newEntry">
+                    <label for="newTag">Add a new tag</label>
+                        <input type="text" id="newTag" name="newTag">
+                        <input type="submit" value="Add New Tag" class="button">
                     </form>
                 </div>
             </div>

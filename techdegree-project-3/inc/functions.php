@@ -47,6 +47,46 @@ function map_entry_to_tags($entry_id, $tag_id)
     }
 }
 
+function create_new_unlinked_tag($newTag){
+
+    include 'connection.php';
+
+    try {
+        $sql = 'INSERT INTO tags (tags) VALUES (:tag);';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tag', $newTag, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        if (1 == $stmt->rowCount()) {
+            {
+                return true;
+            }
+
+            return false;
+        }
+    } catch(Exception $e) {
+        echo "Unable to insert" . $e->getMessage();
+    }
+}
+
+function sort_by_tags($tag){
+    include ("connection.php");
+
+    try {
+        $sql = "SELECT * FROM entries JOIN entry_tags ON entries.id = entry_tags.entry_id JOIN tags ON tags.id = entry_tags.tag_id WHERE tags.tags = :tag ORDER BY date DESC";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tag',$tag,PDO::PARAM_STR);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
+    }
+
+}
 
 
 function get_entry(){
@@ -259,11 +299,9 @@ function delete_tag_mapping($entryId){
         $stmt->bindParam('entry_id',$entryId, PDO::PARAM_INT);
         $stmt->execute();
 
-        if($stmt->rowCount() >= 1){
-            return true;
-        } else {
-            return false;
-        }
+        
+         return true;
+      
 
     } catch(Exception $e) {
         "Unable to query DB" . $e->getMessage();
@@ -277,22 +315,22 @@ function create_new_tag_mapping($entryId,$tagId) {
 
 
     try {
-        foreach($tagId as $tId)
-        $sql = "INSERT INTO entry_tags (entry_id, tag_id) VALUES (:entryId, :tagId)";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("entryId",$entryId,PDO::PARAM_INT);
-        $stmt->bindParam("tagId",$tId,PDO::PARAM_INT);
-        $stmt->execute();
-
-        if($stmt->rowCount() >= 1){
-            return true;
-        } else {
-            return false;
+        foreach ($tagId as $tId) {
+            $sql = 'INSERT INTO entry_tags (entry_id, tag_id) VALUES (:entryId, :tagId)';
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam('entryId', $entryId, PDO::PARAM_INT);
+            $stmt->bindParam('tagId', $tId, PDO::PARAM_INT);
+            $stmt->execute();
         }
 
 
     } catch (Exception $e) {
         "Unable to query DB" . $e->getMessage();
+    }
+    if($stmt->rowCount() >= 1){
+        return true;
+    } else {
+        return false;
     }
 
     }

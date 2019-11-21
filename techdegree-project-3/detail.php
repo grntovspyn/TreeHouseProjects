@@ -40,8 +40,21 @@ $currentEntry = get_entry_by_id($entryId);
                                 <li><a href="">Ipsum dolor sit amet</a></li>
                             </ul>
                         </div>
-                          <?php  }
-                        ?>
+                          <?php  } ?>
+                          <div class="entry">
+                          <h3>Tags</h3>
+                              <?php
+                              $tags = get_tags_by_entry_id($currentEntry['id']);
+                              if($tags == true){
+                                  echo "<p>";
+                                  $tags = array_column($tags, "tags");
+                                  foreach($tags as $tag){
+                                      echo "#" . $tag . " ";
+                                  }
+                                  echo "</p>";
+                              }
+                              ?>
+                              </div>
 
                     </article>
                 </div>

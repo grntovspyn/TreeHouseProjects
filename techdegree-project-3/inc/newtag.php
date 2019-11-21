@@ -8,7 +8,13 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     if(!empty($_POST['newTag'])){
         $newTag = trim(filter_input(INPUT_POST, 'newTag', FILTER_SANITIZE_STRING));
-        if(!create_new_tag($entryId,$newTag)){
+        if($_POST['entryId'] == "newEntry"){
+            if(!create_new_unlinked_tag($newTag)){
+                echo "Cannot create new tag";
+            } else {
+                header('location: ../new.php');
+            }  
+        } else if(!create_new_tag($entryId,$newTag)){
             echo "Cannot create new tag";
         } else {
             header('location: ../edit.php?id='. $entryId);

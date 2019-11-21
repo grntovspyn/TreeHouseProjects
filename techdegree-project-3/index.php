@@ -1,28 +1,59 @@
 <?php include ("inc/header.php"); ?>
 
+<?php
+
+if(isset($_GET['tag'])) {
+    $sortTag = $_GET['tag'];
+}
+
+
+?>
+
         <section>
             <div class="container">
                 <div class="entry-list">
                     <?php
-                    $entries = get_entry();
-                    
-                    foreach($entries AS $entry) {
+                    if(isset($sortTag)){
+                        $entries = sort_by_tags($sortTag);
+                        foreach($entries AS $entry) {
 
-                        echo "<article>
-                        <h2><a href=\"detail.php?id=". $entry['id'] . "\">" .$entry['title']. "</a></h2>
-                        <time datetime=\"" . $entry['date'] . "\">" . date('F, d, Y', strtotime($entry['date'])) . "</time>";
-                        $tags = get_tags_by_entry_id($entry['id']);
-                        if($tags == true){
-                            echo "<p>";
-                            $tags = array_column($tags, "tags");
-                            foreach($tags as $tag){
-                                echo "#" . $tag . " ";
+                            echo "<article>
+                            <h2><a href=\"detail.php?id=". $entry['id'] . "\">" .$entry['title']. "</a></h2>
+                            <time datetime=\"" . $entry['date'] . "\">" . date('F, d, Y', strtotime($entry['date'])) . "</time>";
+                            
+                            $tags = get_tags_by_entry_id($entry['entry_id']);
+                            if($tags == true){
+                                echo "<p>";
+                                $tags = array_column($tags, "tags");
+                                foreach($tags as $tag){
+                                    echo "<a href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
+                                }
+                                echo "</p>";
                             }
-                            echo "</p>";
+                            
+                             echo "</article>";
+    
                         }
-                        
-                         echo "</article>";
+                    } else {
+                        $entries = get_entry();
 
+                        foreach ($entries as $entry) {
+                            echo '<article>
+                        <h2><a href="detail.php?id='.$entry['id'].'">'.$entry['title'].'</a></h2>
+                        <time datetime="'.$entry['date'].'">'.date('F, d, Y', strtotime($entry['date'])).'</time>';
+
+                            $tags = get_tags_by_entry_id($entry['id']);
+                            if (true == $tags) {
+                                echo '<p>';
+                                $tags = array_column($tags, 'tags');
+                                foreach ($tags as $tag) {
+                                    echo "<a href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
+                                }
+                                echo '</p>';
+                            }
+
+                            echo '</article>';
+                        }
                     }
                     ?>
 

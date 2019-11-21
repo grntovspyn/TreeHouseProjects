@@ -9,15 +9,14 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         foreach ($_POST['tagId'] as $tag) {
             $tagId[] = $tag;
         }
-       if(isset($_POST['update'])){
-        if(delete_tag_mapping($entryId)){
-            if(create_new_tag_mapping($entryId,$tagId)){
-                header('location: ../edit.php?id='. $entryId);
+        if (isset($_POST['update'])) {
+            delete_tag_mapping($entryId);
+            var_dump($tagId);
+            if (create_new_tag_mapping($entryId, $tagId)) {
+                header('location: ../edit.php?id='.$entryId);
             }
-        } else {
-            echo "Unable to delete from mapping";
-        }
-    } else if(isset($_POST['delete'])){
+
+            } else if(isset($_POST['delete'])){
         foreach ($tagId as $tag) {
             delete_tags($tag);
         }
@@ -28,7 +27,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     }
     }
 
-
     if(!empty($_POST['newTag'])){
         $newTag = trim(filter_input(INPUT_POST, 'newTag', FILTER_SANITIZE_STRING));
         if(!create_new_tag($entryId,$newTag)){
@@ -36,7 +34,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         } else {
             header('location: ../edit.php?id='. $entryId);
         }
-    }
+        }
+    
+
    
 
 

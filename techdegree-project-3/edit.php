@@ -54,7 +54,7 @@ if (isset($editEntry)) {
                     </form>
                    
                    
-                    <br>
+                    
                     <form method="post" action="inc/edittags.php">
                         
                     <label for="tags">Select which tags to use</label>
@@ -74,7 +74,7 @@ if (isset($editEntry)) {
                     </form>
                    
 
-                    <br>
+                   
                     <form method="post" action="inc/newtag.php">
                     <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
                     <label for="newTag">Add a new tag</label>
