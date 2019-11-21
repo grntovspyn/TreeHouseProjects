@@ -127,7 +127,7 @@ function get_entry_by_id($id){
 }
 
 
-function create_entry($title, $date, $time_spent, $learned, $resources) {
+function create_entry($title, $date, $time_spent, $learned, $resources, $tagId = NULL) {
     include ("connection.php");
     
     try {
@@ -139,16 +139,23 @@ function create_entry($title, $date, $time_spent, $learned, $resources) {
         $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
         $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
         $stmt->execute();
+        if($tagId != NULL){
+        $entryId = $db->lastInsertId();
+        if (1 == $stmt->rowCount()) {
+            if (create_new_tag_mapping($entryId, $tagId)) {
+                return true;
+            }
 
-        if($stmt->rowCount() == 1){
-            return true;
-            
-        } else {
-            
             return false;
-            
         }
-        
+    }
+    if (1 == $stmt->rowCount()) {
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     } catch(Exception $e) {
         echo "Unable to update DB" . $e->getMessage();

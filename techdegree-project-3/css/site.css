@@ -229,6 +229,11 @@ article {
 	
 }
 
+.taglink:link, .taglink:visited, .taglink:hover,.taglink:active {
+	color: orange;
+	border-bottom: none;
+}
+
 
 /* ==========================================================================
    Form Styles

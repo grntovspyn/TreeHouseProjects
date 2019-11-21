@@ -26,7 +26,7 @@ if(isset($_GET['tag'])) {
                                 echo "<p>";
                                 $tags = array_column($tags, "tags");
                                 foreach($tags as $tag){
-                                    echo "<a href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
+                                    echo "<a class='taglink' href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
                                 }
                                 echo "</p>";
                             }
@@ -47,7 +47,7 @@ if(isset($_GET['tag'])) {
                                 echo '<p>';
                                 $tags = array_column($tags, 'tags');
                                 foreach ($tags as $tag) {
-                                    echo "<a href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
+                                    echo "<a class='taglink' href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
                                 }
                                 echo '</p>';
                             }

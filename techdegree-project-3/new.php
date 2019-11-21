@@ -11,7 +11,10 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
     $time_spent = filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING);
     $learned = filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING);
     $resources = filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING);
-    if(create_entry($title, $date, $time_spent, $learned, $resources)){
+    foreach ($_POST['tagId'] as $tag) {
+        $tagId[] = $tag;
+    }
+    if(create_entry($title, $date, $time_spent, $learned, $resources, $tagId)){
         $message = "New entry successfully posted.";
     } else {
         $message = "Unable to post entry";
@@ -46,8 +49,8 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="resources"></textarea>
                         <label for="tags">Select which tags to use</label>
-                    <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
-                        <fieldset form="delTags" class="checkbox" >
+                        <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
+                        <fieldset class="checkbox" >
                         
                         <?php foreach($tags as $tag){
                             echo "<input type=\"checkbox\" name=\"tagId[]\" value=" . $tag['id'] . "> " . $tag['tags'] . "<br>";
