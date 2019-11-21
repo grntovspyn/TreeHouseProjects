@@ -31,7 +31,7 @@ $currentEntry = get_entry_by_id($entryId);
                         <?php
                             if($currentEntry['resources'] != NULL) { ?>
                              <div class="entry">
-                            
+                            <!-- Fix resource load and style -->
                             <h3>Resources to Remember:</h3>
                             <ul>
                                 <li><a href="">Lorem ipsum dolor sit amet</a></li>
