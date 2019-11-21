@@ -46,7 +46,7 @@ if (isset($editEntry)) {
                         <label for="what-i-learned">What I Learned</label>
                         <textarea id="what-i-learned" rows="5" name="learned" required><?php echo $learned;?></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
-                        <textarea id="resources-to-remember" rows="5" name="resources"><?php echo $resources;?></textarea>
+                        <textarea id="resources-to-remember" rows="5" name="resources" placeholder="Seperate each resource by a comma"><?php echo $resources;?></textarea>
                         
                         <input type="submit" name="update" value="Update Entry" class="button">
                         <input type="submit" name="delete" value="Delete Entry" class="button2">

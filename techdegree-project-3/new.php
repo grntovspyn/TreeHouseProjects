@@ -47,7 +47,7 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
                         <label for="what-i-learned">What I Learned</label>
                         <textarea id="what-i-learned" rows="5" name="learned" required></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
-                        <textarea id="resources-to-remember" rows="5" name="resources"></textarea>
+                        <textarea id="resources-to-remember" rows="5" name="resources" placeholder="Seperate each resource by a comma"></textarea>
                         <label for="tags">Select which tags to use</label>
                         <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
                         <fieldset class="checkbox" >

@@ -31,13 +31,16 @@ $currentEntry = get_entry_by_id($entryId);
                         <?php
                             if($currentEntry['resources'] != NULL) { ?>
                              <div class="entry">
-                            <!-- Fix resource load and style -->
+                           
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="">Cras accumsan cursus ante, non dapibus tempor</a></li>
-                                <li>Nunc ut rhoncus felis, vel tincidunt neque</li>
-                                <li><a href="">Ipsum dolor sit amet</a></li>
+                                <?php 
+                                    $resources = explode(",",$currentEntry['resources']);
+                                    foreach($resources as $resource){
+                                        echo "<li><a href=\"\">". $resource . "</a></li>";
+                                    }
+                             
+                                ?>
                             </ul>
                         </div>
                           <?php  } ?>

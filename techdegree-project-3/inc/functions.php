@@ -1,5 +1,145 @@
 <?php
 
+/********************Entry Function*******************/
+
+function get_entry(){
+    include ("connection.php");
+
+    try {
+        $sql = "SELECT * FROM entries ORDER BY date DESC";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
+    }
+
+}
+
+
+function create_entry($title, $date, $time_spent, $learned, $resources, $tagId = NULL) {
+    include ("connection.php");
+    
+    try {
+        $sql = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES (:title, :date, :time_spent, :learned, :resources)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':title',$title,PDO::PARAM_STR);
+        $stmt->bindParam(':date',$date);
+        $stmt->bindParam(':time_spent',$time_spent,PDO::PARAM_STR);
+        $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
+        $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
+        $stmt->execute();
+        if($tagId != NULL){
+        $entryId = $db->lastInsertId();
+        if (1 == $stmt->rowCount()) {
+            if (create_new_tag_mapping($entryId, $tagId)) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+    if (1 == $stmt->rowCount()) {
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    } catch(Exception $e) {
+        echo "Unable to update DB" . $e->getMessage();
+        die(); 
+    }
+
+}
+
+
+
+function update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources){
+    include ("connection.php");
+    
+
+    try {
+        $sql = "UPDATE entries SET title = :title, date = :date, time_spent = :time_spent, learned = :learned, resources = :resources WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->bindParam(':title',$title,PDO::PARAM_STR);
+        $stmt->bindParam(':date',$date,PDO::PARAM_STR);
+        $stmt->bindParam(':time_spent',$time_spent,PDO::PARAM_STR);
+        $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
+        $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
+        $stmt->execute();
+
+        if($stmt->rowCount() == 1){
+            return true;
+            
+        } else {
+            
+            return false;
+            
+        }
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
+    }
+
+}
+
+
+function get_entry_by_id($id){
+    include ("connection.php");
+
+    try {
+        $sql = "SELECT * FROM entries WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $results;
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
+    }
+
+}
+
+
+function delete_entry($id){
+
+    include ("connection.php");
+    
+    try {
+        $sql = "DELETE FROM entries WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+
+        
+        if($stmt->rowCount() == 1){
+            return true;
+            
+        } else {
+            
+            return false;
+            
+        }
+
+    } catch (Exception $e) {
+        echo "Unable to query DB" . $e->getMessage();
+        die();
+    }
+
+}
+
+
 
 function create_new_tag($entryId, $tag)
 {
@@ -83,148 +223,15 @@ function sort_by_tags($tag){
 
     } catch (Exception $e) {
         echo "Unable to query DB" . $e->getMessage();
-        die();
     }
 
 }
 
 
-function get_entry(){
-    include ("connection.php");
 
-    try {
-        $sql = "SELECT * FROM entries ORDER BY date DESC";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $results;
-
-    } catch (Exception $e) {
-        echo "Unable to query DB" . $e->getMessage();
-        die();
-    }
-
-}
-
-function get_entry_by_id($id){
-    include ("connection.php");
-
-    try {
-        $sql = "SELECT * FROM entries WHERE id = :id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
-        $stmt->execute();
-        $results = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        return $results;
-
-    } catch (Exception $e) {
-        echo "Unable to query DB" . $e->getMessage();
-        die();
-    }
-
-}
+/**************TAG FUNCTIONS*************/
 
 
-function create_entry($title, $date, $time_spent, $learned, $resources, $tagId = NULL) {
-    include ("connection.php");
-    
-    try {
-        $sql = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES (:title, :date, :time_spent, :learned, :resources)";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':title',$title,PDO::PARAM_STR);
-        $stmt->bindParam(':date',$date);
-        $stmt->bindParam(':time_spent',$time_spent,PDO::PARAM_STR);
-        $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
-        $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
-        $stmt->execute();
-        if($tagId != NULL){
-        $entryId = $db->lastInsertId();
-        if (1 == $stmt->rowCount()) {
-            if (create_new_tag_mapping($entryId, $tagId)) {
-                return true;
-            }
-
-            return false;
-        }
-    }
-    if (1 == $stmt->rowCount()) {
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    } catch(Exception $e) {
-        echo "Unable to update DB" . $e->getMessage();
-        die(); 
-    }
-
-}
-
-function update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources){
-    include ("connection.php");
-    
-
-    try {
-        $sql = "UPDATE entries SET title = :title, date = :date, time_spent = :time_spent, learned = :learned, resources = :resources WHERE id = :id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
-        $stmt->bindParam(':title',$title,PDO::PARAM_STR);
-        $stmt->bindParam(':date',$date,PDO::PARAM_STR);
-        $stmt->bindParam(':time_spent',$time_spent,PDO::PARAM_STR);
-        $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
-        $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
-        $stmt->execute();
-
-        if($stmt->rowCount() == 1){
-            return true;
-            
-        } else {
-            
-            return false;
-            
-        }
-
-    } catch (Exception $e) {
-        echo "Unable to query DB" . $e->getMessage();
-        die();
-    }
-
-
-    
-
-
-}
-
-function delete_entry($id){
-
-    include ("connection.php");
-    
-    try {
-        $sql = "DELETE FROM entries WHERE id = :id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
-        $stmt->execute();
-
-        
-        if($stmt->rowCount() == 1){
-            return true;
-            
-        } else {
-            
-            return false;
-            
-        }
-
-    } catch (Exception $e) {
-        echo "Unable to query DB" . $e->getMessage();
-        die();
-    }
-
-}
 
 
 function get_tags_by_entry_id($entries_id){
@@ -246,7 +253,6 @@ function get_tags_by_entry_id($entries_id){
 
 } catch (Exception $e) {
     echo "Unable to query DB" . $e->getMessage();
-    die();
 }
 
 }
@@ -264,7 +270,6 @@ function get_tags() {
 
     } catch (Exception $e) {
         echo "Unable to query DB" . $e->getMessage();
-        die();
     }
 
 }
@@ -287,18 +292,15 @@ function delete_tags($tag){
         }
 
 
-    } catch (Exception $e) {
-        echo "Unable to query DB" . $e->getMessage();
-        die();
-    }
+        } catch (Exception $e) {
+            echo "Unable to query DB" . $e->getMessage();
+        }
 
 }
 
 
 function delete_tag_mapping($entryId){
     include ("connection.php");
-
-
 
     try {
         $sql = 'DELETE FROM entry_tags WHERE entry_id = :entry_id';
@@ -307,13 +309,12 @@ function delete_tag_mapping($entryId){
         $stmt->execute();
 
         
-         return true;
+             return true;
       
 
-    } catch(Exception $e) {
-        "Unable to query DB" . $e->getMessage();
-    }
-
+        } catch(Exception $e) {
+            "Unable to query DB" . $e->getMessage();
+        }
 
 }
 
@@ -331,14 +332,15 @@ function create_new_tag_mapping($entryId,$tagId) {
         }
 
 
-    } catch (Exception $e) {
-        "Unable to query DB" . $e->getMessage();
-    }
-    if($stmt->rowCount() >= 1){
-        return true;
-    } else {
-        return false;
-    }
+        } catch (Exception $e) {
+            "Unable to query DB" . $e->getMessage();
+        }
+        
+        if($stmt->rowCount() >= 1){
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
