@@ -8,7 +8,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     if(!empty($_POST['newTag'])){
         $newTag = trim(filter_input(INPUT_POST, 'newTag', FILTER_SANITIZE_STRING));
-        $newTag = str_replace(' ', '',$newTag);
+        $newTag = str_replace(' ', '',$newTag); //no spaces in hashtags
         if($_POST['entryId'] == "newEntry"){
             if(!create_new_unlinked_tag($newTag)){
                 echo "Cannot create new tag";

@@ -4,16 +4,25 @@
 $message = "";
 
 
-if ('GET' == $_SERVER['REQUEST_METHOD']) {
+
     if (isset($_GET['id'])) {
         $entryId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $editEntry = get_entry_by_id($entryId);
+        $tags = get_tags();
+        
+        //Used to check the boxes of current tags
+        $usedTags = get_tags_by_entry_id($entryId); 
+        if(is_array($usedTags)) {
+            $usedTags = array_column($usedTags, 'id');
+        } else {
+            $usedTags = array();
+        }
     } else {
         header('location: index.php');
     }
-    $editEntry = get_entry_by_id($entryId);
-    $tags = get_tags();
+   
     
-}
+
 
 if (isset($editEntry)) {
     $id = htmlspecialchars($editEntry['id']);
@@ -24,7 +33,6 @@ if (isset($editEntry)) {
     $resources = htmlspecialchars($editEntry['resources']);
         
 }
-
 
 
 ?>
@@ -62,7 +70,11 @@ if (isset($editEntry)) {
                         <fieldset form="delTags" class="checkbox" >
                         
                         <?php foreach($tags as $tag){
-                            echo "<input type=\"checkbox\" name=\"tagId[]\" value=" . $tag['id'] . "> " . $tag['tags'] . "<br>";
+                            echo "<input type=\"checkbox\" name=\"tagId[]\" value=" . $tag['id'] . " ";
+                            if(in_array($tag['id'], $usedTags)){  //check if tag is used out of all the tags and if so check the box
+                                echo "checked";
+                            }
+                            echo "> " . $tag['tags'] . "\n<br>";
                           
                         } 
                         ?>

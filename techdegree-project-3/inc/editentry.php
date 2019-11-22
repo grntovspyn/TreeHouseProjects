@@ -14,7 +14,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         if (update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)) {
             header('location: ../edit.php?id='.$id);
         } else {
-            echo 'something failes';
+            echo 'Something failed';
         }
     } else if (isset($_POST['delete'])) {
     if(delete_entry($id)){

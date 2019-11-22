@@ -33,7 +33,7 @@ function create_entry($title, $date, $time_spent, $learned, $resources, $tagId =
         $stmt->bindParam(':learned',$learned,PDO::PARAM_STR);
         $stmt->bindParam(':resources',$resources,PDO::PARAM_STR);
         $stmt->execute();
-        if($tagId != NULL){
+        if($tagId != NULL){   //If a user is creating a new post with tags already selected map those as well
         $entryId = $db->lastInsertId();
         if (1 == $stmt->rowCount()) {
             if (create_new_tag_mapping($entryId, $tagId)) {
@@ -140,6 +140,9 @@ function delete_entry($id){
 }
 
 
+/**************TAG FUNCTIONS*************/
+
+
 
 function create_new_tag($entryId, $tag)
 {
@@ -187,6 +190,7 @@ function map_entry_to_tags($entry_id, $tag_id)
     }
 }
 
+//Made this function so if a user wants to make a new tag before posting a new post and use tag
 function create_new_unlinked_tag($newTag){
 
     include 'connection.php';
@@ -209,6 +213,8 @@ function create_new_unlinked_tag($newTag){
     }
 }
 
+//Sort function when user wants to sort the entries by common tags
+
 function sort_by_tags($tag){
     include ("connection.php");
 
@@ -227,12 +233,7 @@ function sort_by_tags($tag){
 
 }
 
-
-
-/**************TAG FUNCTIONS*************/
-
-
-
+//Used for detail and edit page to know which tags the current entry has
 
 function get_tags_by_entry_id($entries_id){
     include ("connection.php");
@@ -256,6 +257,7 @@ function get_tags_by_entry_id($entries_id){
 }
 
 }
+
 
 function get_tags() {
     include ("connection.php");
@@ -343,11 +345,6 @@ function create_new_tag_mapping($entryId,$tagId) {
         }
 
     }
-
-
-
-
-
 
 
 

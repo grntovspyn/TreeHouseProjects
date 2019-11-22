@@ -7,39 +7,39 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     if (isset($_POST['tagId'])) {
         foreach ($_POST['tagId'] as $tag) {
-            $tagId[] = $tag;
+            $tagId[] = $tag;  //Create array of tags to be processed by function
         }
-        if (isset($_POST['update'])) {
-            delete_tag_mapping($entryId);
-            var_dump($tagId);
+    }
+
+    if (isset($_POST['update'])) {
+        delete_tag_mapping($entryId);  //Delete the tag mappings so as to not have duplicate mappings to same tag
+        if (isset($tagId)) {
             if (create_new_tag_mapping($entryId, $tagId)) {
                 header('location: ../edit.php?id='.$entryId);
+            } else {
+                echo 'Unable to create new mapping';
             }
+        }
+        header('location: ../edit.php?id='.$entryId);;
+    }
 
-            } else if(isset($_POST['delete'])){
+
+    if (isset($_POST['delete'])) {
         foreach ($tagId as $tag) {
             delete_tags($tag);
         }
-            header('location: ../edit.php?id='. $entryId);
-        }
-    } else {
-        echo 'Unable to delete from mapping';
-    }
+        header('location: ../edit.php?id='.$entryId);
     }
 
-    if(!empty($_POST['newTag'])){
+    if (!empty($_POST['newTag'])) {
         $newTag = trim(filter_input(INPUT_POST, 'newTag', FILTER_SANITIZE_STRING));
-        if(!create_new_tag($entryId,$newTag)){
-            echo "Cannot create new tag";
+        if (create_new_tag($entryId, $newTag)) {
+            header('location: ../edit.php?id='.$entryId);
+            
         } else {
-            header('location: ../edit.php?id='. $entryId);
+            echo 'Cannot create new tag';
         }
-        }
-    
-
-   
-
-
-
+    }
+}
 
 ?>
