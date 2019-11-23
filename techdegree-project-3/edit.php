@@ -9,7 +9,7 @@ $message = "";
         $entryId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         $editEntry = get_entry_by_id($entryId);
         $tags = get_tags();
-        
+
         //Used to check the boxes of current tags
         $usedTags = get_tags_by_entry_id($entryId); 
         if(is_array($usedTags)) {
@@ -90,7 +90,7 @@ if (isset($editEntry)) {
                     <form method="post" action="inc/newtag.php">
                     <input type="hidden" name="entryId" value="<?php echo $entryId;?>">
                     <label for="newTag">Add a new tag</label>
-                        <input type="text" id="newTag" name="newTag">
+                        <input type="text" id="newTag" name="newTag" placeholder="Seperate each tag by a comma" required>
                         <input type="submit" value="Add New Tag" class="button">
                     </form>
                 </div>

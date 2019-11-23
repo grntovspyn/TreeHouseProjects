@@ -11,11 +11,15 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
     $time_spent = filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING);
     $learned = filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING);
     $resources = filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING);
-    foreach ($_POST['tagId'] as $tag) {
-        $tagId[] = $tag;
+    if (isset($_POST['tagId'])) {
+        foreach ($_POST['tagId'] as $tag) {
+            $tagId[] = $tag;
+        }
+    } else {
+        $tagId = array();
     }
     if(create_entry($title, $date, $time_spent, $learned, $resources, $tagId)){
-        $message = "New entry successfully posted.";
+        header("location: index.php");
     } else {
         $message = "Unable to post entry";
     
@@ -65,7 +69,7 @@ if('POST' == $_SERVER['REQUEST_METHOD']) {
                     <form method="post" action="inc/newtag.php">
                     <input type="hidden" name="entryId" value="newEntry">
                     <label for="newTag">Add a new tag</label>
-                        <input type="text" id="newTag" name="newTag">
+                        <input type="text" id="newTag" name="newTag" placeholder="Seperate each tag by a comma" required>
                         <input type="submit" value="Add New Tag" class="button">
                     </form>
                 </div>

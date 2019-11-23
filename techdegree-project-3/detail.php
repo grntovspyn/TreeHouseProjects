@@ -44,18 +44,23 @@ $currentEntry = get_entry_by_id($entryId);
                             </ul>
                         </div>
                           <?php  } ?>
+
+                          <?php 
+                            $tags = get_tags_by_entry_id($currentEntry['id']);
+                            if(!empty($tags)){ ?>
                           <div class="entry">
                           <h3>Tags</h3>
                               <?php
-                              $tags = get_tags_by_entry_id($currentEntry['id']);
-                              if($tags == true){
-                                  echo "<p>";
-                                  $tags = array_column($tags, "tags");
-                                  foreach($tags as $tag){
-                                      echo "<a class='taglink' href=index.php?tag=".$tag. ">#" . $tag . "</a> ";
+
+                              if (true == $tags) {
+                                  echo '<p>';
+                                  $tags = array_column($tags, 'tags');
+                                  foreach ($tags as $tag) {
+                                      echo "<a class='taglink' href=index.php?tag=".$tag.'>#'.$tag.'</a> ';
                                   }
-                                  echo "</p>";
+                                  echo '</p>';
                               }
+                            }
                               ?>
                               </div>
 
