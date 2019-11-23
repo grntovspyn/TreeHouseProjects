@@ -15,12 +15,12 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         delete_tag_mapping($entryId);  //Delete the tag mappings so as to not have duplicate mappings to same tag
         if (isset($tagId)) {
             if (create_new_tag_mapping($entryId, $tagId)) {
-                header('location: ../edit.php?id='.$entryId);
+                header('location: ../detail.php?id='.$entryId);
             } else {
                 echo 'Unable to create new mapping';
             }
         }
-        header('location: ../edit.php?id='.$entryId);;
+        header('location: ../detail.php?id='.$entryId);;
     }
 
 

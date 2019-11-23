@@ -12,7 +12,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
   
     if (isset($_POST['update'])) {
         if (update_entry_by_id($id, $title, $date, $time_spent, $learned, $resources)) {
-            header('location: ../edit.php?id='.$id);
+            header('location: ../detail.php?id='.$id);
         } else {
             echo 'Something failed';
         }
