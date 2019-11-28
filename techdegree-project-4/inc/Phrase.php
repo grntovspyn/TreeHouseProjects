@@ -14,7 +14,7 @@ class Phrase
             exit();
         }
         if(empty($phrase)) {
-            $phrase = "dream big";
+            $phrase = "hello world";
         }
        
         $this->currentPhrase = $phrase;
@@ -31,9 +31,9 @@ class Phrase
                
        foreach ($characters as $character) {
            if (' ' == $character) {
-               $displayString .= '<li class="hide space"> </li>';
+               $displayString .= "<li class=\"hide space\"> </li>\n";
            } else {
-               $displayString .= "<li class=\"hide letter {$character}\">{$character}</li>";
+               $displayString .= "<li class=\"hide letter {$character}\">{$character}</li>\n";
            }
        }
        $displayString .= " </ul></div>";
@@ -49,9 +49,24 @@ class Phrase
         */
     }
 
-    public function checkLetter($letter) {
-        //checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
+    public function splitPhrase() {
+        return str_split(strtolower($this->currentPhrase));
     }
+
+    public function checkLetter($letter) {
+        $characters = $this->splitPhrase();
+        foreach($characters as $character) {
+            if ($character == $letter) {
+                
+                return true;
+                }
+        }
+        return false;
+    }
+        
+
+        //checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
+    
 
 }// END OF CLASS
     

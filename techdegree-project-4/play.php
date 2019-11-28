@@ -1,13 +1,42 @@
 <?php
+session_start();
 require "inc/Game.php";
 require "inc/Phrase.php";
-
 $phrase = new Phrase();
 $game = new Game($phrase);
 
+if(!isset($_SESSION['letters'])){
+    $_SESSION['letters'] = "";
+}
+
+if(!isset($_SESSION['selected'])){
+    $_SESSION['selected'] = "";
+}
+if(!isset($_SESSION['correct'])){
+    $_SESSION['correct'] = "";
+}
+if(!isset($_SESSION['wrong'])){
+    $_SESSION['wrong'] = "";
+}
+
+
+if(isset($_POST['key'])) {
+   $selected = filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
+   var_dump($selected);
+    if($phrase->checkLetter($selected)){
+        $_SESSION['correct'] .= $selected;
+    } else {
+        $_SESSION['wrong'] .= $selected;
+    }
+}
+
+var_dump($_SESSION['correct']);
+var_dump($_SESSION['wrong']);
+
+
 // var_dump($phrase);
 // var_dump($game);
-var_dump($_POST);
+//var_dump($_POST);
 
 
 ?>
@@ -28,11 +57,11 @@ var_dump($_POST);
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
         <?php echo $phrase->addPhraseToDisplay(); ?>
-        <?php echo $game->displayKeyboard(); ?>
-        <?php echo $game->displayScore(); ?>
+        <?php echo $game->displayKeyboard($_SESSION['correct'], $_SESSION['wrong']); ?>
+        <?php echo $game->displayScore($_SESSION['wrong']); ?>
     </div>
     
-    
+    <a href="inc/endsession.php">Start Over</a>
 </div>
 
 </body>
