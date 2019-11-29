@@ -2,8 +2,11 @@
 session_start();
 require "inc/Game.php";
 require "inc/Phrase.php";
-$phrase = new Phrase();
-$game = new Game($phrase);
+if(isset($_SESSION['selected'])) {
+    $phrase = new Phrase($phrase, $_SESSION['selected']);
+    $game = new Game($phrase);
+}
+
 
 if(!isset($_SESSION['letters'])){
     $_SESSION['letters'] = "";
@@ -30,15 +33,6 @@ if(isset($_POST['key'])) {
     }
 }
 
-var_dump($_SESSION['correct']);
-var_dump($_SESSION['wrong']);
-
-
-// var_dump($phrase);
-// var_dump($game);
-//var_dump($_POST);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +50,7 @@ var_dump($_SESSION['wrong']);
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
-        <?php echo $phrase->addPhraseToDisplay(); ?>
+        <?php echo $phrase->addPhraseToDisplay($_SESSION['correct']); ?>
         <?php echo $game->displayKeyboard($_SESSION['correct'], $_SESSION['wrong']); ?>
         <?php echo $game->displayScore($_SESSION['wrong']); ?>
     </div>

@@ -19,10 +19,12 @@ class Game
     }
 
     public function gameOver() {
+        
         //this method displays one message if the player wins and another message if they lose. It returns false if the game has not been won or lost.
     }
 
     public function displayKeyboard($correctKey, $incorrectKey){
+        var_dump($this->phrase);
         $rowOneArray = array("q","w","e","r","t","y","u","i","o","p");
         $rowTwoArray = array("a","s","d","f","g","h","j","k","l");
         $rowThreeArray = array("z","x","c","v","b","n","m");
