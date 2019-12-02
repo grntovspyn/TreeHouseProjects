@@ -28,7 +28,7 @@ class Phrase
         }
 
     }
-    public function addPhraseToDisplay($correctKey) {
+    public function addPhraseToDisplay() {
        
         /*
         * Builds the HTML for the letters of the phrase. 
@@ -41,13 +41,15 @@ class Phrase
         */
 
        $characters = str_split(strtolower($this->currentPhrase));
+       var_dump($this->selected);
+       //$selected = implode(",", $this->selected);
             $displayString = "<div id=\"phrase\" class=\"section\"><ul>\n";
                
        foreach ($characters as $character) {
 
            switch($character) {
 
-            case(stripos($correctKey, $character) !== false):
+            case(in_array($character,$this->selected)):
                 $displayString .= "<li class=\"show letter {$character}\">{$character}</li>\n";
             break;
 
@@ -67,14 +69,10 @@ class Phrase
        
     }
 
-    public function splitPhrase() {
-        return array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
-    }
-
-
+   
      //checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
     public function checkLetter($letter) {
-        $characters = $this->splitPhrase();
+        $characters = array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
 
         if (in_array($letter, $characters)) {
             return true;
@@ -82,22 +80,11 @@ class Phrase
             return false;
         }
 
-        // foreach ($characters as $character) {
-        //     if ($character == $letter) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-
-           
-        // }
+ 
 
        
     }
-
-    //     
-    // }
-    
+ 
     public function getPhrase() {
         
         return $this->currentPhrase;
@@ -105,8 +92,6 @@ class Phrase
     }
 
        
-    
-
 }// END OF CLASS
     
 

@@ -3,20 +3,12 @@ session_start();
 require "inc/Game.php";
 require "inc/Phrase.php";
 
-var_dump($_POST);
-
 if(!isset($_SESSION['letters'])){
     $_SESSION['letters'] = "";
 }
 
 if(!isset($_SESSION['selected'])){
-    $_SESSION['selected'] = "";
-}
-if(!isset($_SESSION['correct'])){
-    $_SESSION['correct'] = "";
-}
-if(!isset($_SESSION['wrong'])){
-    $_SESSION['wrong'] = "";
+    $_SESSION['selected'] = array();
 }
 
 if(isset($_POST['startgame'])){
@@ -27,19 +19,9 @@ if(isset($_POST['startgame'])){
 
 
 if (isset($_POST['key'])) {
-    $_SESSION['selected'] = $_POST['key']; //filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
+    $_SESSION['selected'][] = filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
     $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
-    if ($phrase->checkLetter($_SESSION['selected'])) {
-        $_SESSION['correct'] .= $_SESSION['selected'];
- 
-    } else {
-        $_SESSION['wrong'] .= $_SESSION['selected'];
-
-    }
 }
-
-
-
 
 
 var_dump($_POST);
@@ -47,42 +29,6 @@ var_dump($_SESSION);
 
 
  $game = new Game($phrase);
-
-
-
-
-
-// $game = new Game($phrase);
-
-// echo $game->getPhrase();
-// $var = $game->getPhrase();
-
-// var_dump($var);
-// var_dump($phrase);
-// if(!isset($_SESSION['letters'])){
-//     $_SESSION['letters'] = "";
-// }
-
-// if(!isset($_SESSION['selected'])){
-//     $_SESSION['selected'] = "";
-// }
-// if(!isset($_SESSION['correct'])){
-//     $_SESSION['correct'] = "";
-// }
-// if(!isset($_SESSION['wrong'])){
-//     $_SESSION['wrong'] = "";
-// }
-
-
-// if(isset($_POST['key'])) {
-//    $_SESSION['selected'] = filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
-//    var_dump($_SESSION['selected']);
-//     if($phrase->checkLetter($_SESSION['selected'])){
-//         $_SESSION['correct'] .= $_SESSION['selected'];
-//     } else {
-//         $_SESSION['wrong'] .= $_SESSION['selected'];
-//     }
-// }
 
 ?>
 
@@ -101,8 +47,8 @@ var_dump($_SESSION);
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
-        <?php echo $phrase->addPhraseToDisplay($_SESSION['correct']); ?>
-        <?php echo $game->displayKeyboard($_SESSION['correct'], $_SESSION['wrong']); ?>
+        <?php echo $phrase->addPhraseToDisplay(); ?>
+        <?php echo $game->displayKeyboard($_SESSION['selected']); ?>
         <?php echo $game->displayScore($_SESSION['wrong']); ?>
     </div>
     

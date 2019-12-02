@@ -23,13 +23,13 @@ class Game
         //this method displays one message if the player wins and another message if they lose. It returns false if the game has not been won or lost.
     }
 
-    public function displayKeyboard($correctKey, $incorrectKey){
+    public function displayKeyboard($selected){
         var_dump($this->phrase->getPhrase());
         $rowOneArray = array("q","w","e","r","t","y","u","i","o","p");
         $rowTwoArray = array("a","s","d","f","g","h","j","k","l");
         $rowThreeArray = array("z","x","c","v","b","n","m");
-        $correctKeyArray = str_split(strtolower($correctKey));
-        $incorrectKeyArray = str_split(strtolower($incorrectKey));
+       
+        
         /*
         * Create a onscreen keyboard form. See the example_html/keyboard.txt file for an example 
         * of what the render HTML for the keyboard should look like. If the letter has been selected 
@@ -42,14 +42,18 @@ class Game
         $keyboard .= "<div class=\"keyrow\">\n";
 
         
-
+    
         foreach($rowOneArray as $rowOneLetter) {
             $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowOneLetter . "\" ";
             
-            if(stripos($correctKey, $rowOneLetter) !== false){
-                $keyboard .= "style=\"background-color: green\" disabled";
-            } elseif(stripos($incorrectKey, $rowOneLetter) !== false) {
-                $keyboard .= "style=\"background-color: red\" disabled";
+            if (in_array($rowOneLetter, $selected)) {
+                if ($this->phrase->checkLetter($rowOneLetter)) {
+                
+                    $keyboard .= 'style="background-color: green" disabled';
+                } else {
+               
+                    $keyboard .= 'style="background-color: red" disabled';
+                }
             }
 
             $keyboard .=">" . $rowOneLetter . "</button>\n";
@@ -58,10 +62,14 @@ class Game
         $keyboard .= "</div> \n <div class=\"keyrow\">\n";
         foreach($rowTwoArray as $rowTwoLetter) {
             $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowTwoLetter . "\" ";
-            if(stripos($correctKey, $rowTwoLetter) !== false){
-                $keyboard .= "style=\"background-color: green\" disabled";
-            } elseif(stripos($incorrectKey, $rowTwoLetter) !== false ) {
-                $keyboard .= "style=\"background-color: red\" disabled";
+            if (in_array($rowTwoLetter, $selected)) {
+                if ($this->phrase->checkLetter($rowTwoLetter)) {
+                
+                    $keyboard .= 'style="background-color: green" disabled';
+                } else {
+               
+                    $keyboard .= 'style="background-color: red" disabled';
+                }
             }
 
             $keyboard .=">" . $rowTwoLetter . "</button>\n";
@@ -72,12 +80,15 @@ class Game
 
         foreach($rowThreeArray as $rowThreeLetter) {
             $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowThreeLetter . "\" ";
-            if(stripos($correctKey, $rowThreeLetter) !== false){
-                $keyboard .= "style=\"background-color: green\" disabled";
-            } elseif(stripos($incorrectKey, $rowThreeLetter) !== false) {
-                $keyboard .= "style=\"background-color: red\" disabled";
+            if (in_array($rowThreeLetter, $selected)) {
+                if ($this->phrase->checkLetter($rowThreeLetter)) {
+                
+                    $keyboard .= 'style="background-color: green" disabled';
+                } else {
+               
+                    $keyboard .= 'style="background-color: red" disabled';
+                }
             }
-
             $keyboard .=">" . $rowThreeLetter . "</button>\n";
         }
 
