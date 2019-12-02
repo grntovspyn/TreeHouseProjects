@@ -2,11 +2,8 @@
 session_start();
 require "inc/Game.php";
 require "inc/Phrase.php";
-if(isset($_SESSION['selected'])) {
-    $phrase = new Phrase($phrase, $_SESSION['selected']);
-    $game = new Game($phrase);
-}
 
+var_dump($_POST);
 
 if(!isset($_SESSION['letters'])){
     $_SESSION['letters'] = "";
@@ -22,16 +19,70 @@ if(!isset($_SESSION['wrong'])){
     $_SESSION['wrong'] = "";
 }
 
+if(isset($_POST['startgame'])){
+    $phrase = new Phrase();
+    $_SESSION['phrase'] = $phrase->getPhrase();
 
-if(isset($_POST['key'])) {
-   $selected = filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
-   var_dump($selected);
-    if($phrase->checkLetter($selected)){
-        $_SESSION['correct'] .= $selected;
+} 
+
+
+if (isset($_POST['key'])) {
+    $_SESSION['selected'] = $_POST['key']; //filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
+    $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+    if ($phrase->checkLetter($_SESSION['selected'])) {
+        $_SESSION['correct'] .= $_SESSION['selected'];
+ 
     } else {
-        $_SESSION['wrong'] .= $selected;
+        $_SESSION['wrong'] .= $_SESSION['selected'];
+
     }
 }
+
+
+
+
+
+var_dump($_POST);
+var_dump($_SESSION);
+
+
+ $game = new Game($phrase);
+
+
+
+
+
+// $game = new Game($phrase);
+
+// echo $game->getPhrase();
+// $var = $game->getPhrase();
+
+// var_dump($var);
+// var_dump($phrase);
+// if(!isset($_SESSION['letters'])){
+//     $_SESSION['letters'] = "";
+// }
+
+// if(!isset($_SESSION['selected'])){
+//     $_SESSION['selected'] = "";
+// }
+// if(!isset($_SESSION['correct'])){
+//     $_SESSION['correct'] = "";
+// }
+// if(!isset($_SESSION['wrong'])){
+//     $_SESSION['wrong'] = "";
+// }
+
+
+// if(isset($_POST['key'])) {
+//    $_SESSION['selected'] = filter_input(INPUT_POST, "key", FILTER_SANITIZE_STRING);
+//    var_dump($_SESSION['selected']);
+//     if($phrase->checkLetter($_SESSION['selected'])){
+//         $_SESSION['correct'] .= $_SESSION['selected'];
+//     } else {
+//         $_SESSION['wrong'] .= $_SESSION['selected'];
+//     }
+// }
 
 ?>
 
@@ -61,10 +112,10 @@ if(isset($_POST['key'])) {
 </body>
 </html>
 
-
+<!-- 
 This file creates a new instance of the Phrase class which OPTIONALLY accepts the current phrase as a string, and an array of selected letters.
     This file creates a new instance of the Game class which accepts the created instance of the Phrase class.
     The constructor should handle storing the phrase string and selected letters in sessions or another storage mechanism.
     In the body of the page you should play the game. To play the game:
         Use the gameOver method to check if the game has been won or lost and display appropriate messages.
-        If the game is still in play, display the game items: displayPhrase(), displayKeyboard(), displayScore()
+        If the game is still in play, display the game items: displayPhrase(), displayKeyboard(), displayScore() -->

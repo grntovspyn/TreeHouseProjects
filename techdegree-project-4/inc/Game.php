@@ -24,7 +24,7 @@ class Game
     }
 
     public function displayKeyboard($correctKey, $incorrectKey){
-        var_dump($this->phrase);
+        var_dump($this->phrase->getPhrase());
         $rowOneArray = array("q","w","e","r","t","y","u","i","o","p");
         $rowTwoArray = array("a","s","d","f","g","h","j","k","l");
         $rowThreeArray = array("z","x","c","v","b","n","m");
@@ -38,7 +38,7 @@ class Game
         */
 
         $keyboard = "<form method=\"post\" action=\"play.php\">\n";
-        $keyboard .= "<div id=\"qwerty\" class=\"section\">";
+        $keyboard .= "<div id=\"qwerty\" class=\"section\">\n";
         $keyboard .= "<div class=\"keyrow\">\n";
 
         
@@ -109,6 +109,14 @@ class Game
         return $score;
     }
 
+
+    /**
+     * Get the value of phrase
+     */ 
+    public function getPhrase()
+    {
+        return $this->phrase->currentPhrase;
+    }
 } //END OF CLASS
 
 

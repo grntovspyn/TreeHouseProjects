@@ -4,6 +4,12 @@ class Phrase
 {
     private $currentPhrase;
     private $selected = array();
+    public $phrases = array(
+        "Boldness be my friend",
+        "Leave no stone unturned",
+        "Broken crayons still color",
+        "The adventure begins"
+    );
 
     public function __construct($phrase = "",$letters = array()) {
         /*
@@ -14,13 +20,13 @@ class Phrase
         if (!empty($phrase) && !empty($letters)) {
             $this->currentPhrase = $phrase;
             $this->selected = $letters;
-            exit();
+            
         }
         if (empty($phrase)) {
-            $phrase = 'hello world';
+            $key = rand(0,count($this->phrases)-1);
+            $this->currentPhrase = $this->phrases[$key];
         }
 
-        $this->currentPhrase = $phrase;
     }
     public function addPhraseToDisplay($correctKey) {
        
@@ -34,7 +40,7 @@ class Phrase
         * Make sure the phrase displayed on the screen doesn't include boxes for spaces: see example HTML. 
         */
 
-       $characters = $this->splitPhrase();
+       $characters = str_split(strtolower($this->currentPhrase));
             $displayString = "<div id=\"phrase\" class=\"section\"><ul>\n";
                
        foreach ($characters as $character) {
@@ -62,22 +68,41 @@ class Phrase
     }
 
     public function splitPhrase() {
-        return str_split(strtolower($this->currentPhrase));
+        return array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
     }
 
 
      //checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
     public function checkLetter($letter) {
         $characters = $this->splitPhrase();
-        foreach($characters as $character) {
-            if ($character == $letter) {
-                
-                return true;
-                }
+
+        if (in_array($letter, $characters)) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
+
+        // foreach ($characters as $character) {
+        //     if ($character == $letter) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+
+           
+        // }
+
+       
     }
+
+    //     
+    // }
+    
+    public function getPhrase() {
         
+        return $this->currentPhrase;
+
+    }
 
        
     
