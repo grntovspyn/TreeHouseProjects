@@ -26,7 +26,7 @@ var_dump($_SESSION);
 
 
  $game = new Game($phrase);
- $phrase->numberLost();
+ var_dump($game->checkForLose());
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +42,19 @@ var_dump($_SESSION);
 
 <body>
 <div class="main-container">
+    
     <div id="banner" class="section">
+    <?php  if($game->gameOver()) {
+        echo $game->gameOver(); }
+  
+        ?>
         <h2 class="header">Phrase Hunter</h2>
+        
         <?php echo $phrase->addPhraseToDisplay(); ?>
         <?php echo $game->displayKeyboard($_SESSION['selected']); ?>
-        <?php echo $game->displayScore($_SESSION['wrong']); ?>
+        <?php echo $game->displayScore(); ?>
     </div>
-    
+   
     <a href="inc/endsession.php">Start Over</a>
 </div>
 

@@ -91,7 +91,7 @@ class Phrase
 
     public function numberLost() {
 
-        var_dump(count(array_diff($this->selected, $this->getLetterArray())));
+        return count(array_diff($this->selected, $this->getLetterArray()));
 
 
     }
@@ -103,6 +103,14 @@ class Phrase
     }
 
        
+
+    /**
+     * Get the value of selected
+     */ 
+    public function getSelected()
+    {
+        return $this->selected;
+    }
 }// END OF CLASS
     
 

@@ -11,15 +11,34 @@ class Game
     }
 
     public function checkForWin() {
+
         //this method checks to see if the player has selected all of the letters.
+        $correctCount = count(array_intersect($this->phrase->getSelected(), $this->phrase->getLetterArray()));
+        $totalCount = count($this->phrase->getLetterArray());
+
+        if($correctCount == $totalCount) {
+           return true;
+        }
     }
 
     public function checkForLose() {
         //this method checks to see if the player has guessed too many wrong letters.
+        if($this->phrase->numberLost() >= $this->lives){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function gameOver() {
         
+        if($this->checkForLose()){
+            $string = "<h1 id=\"overlay\" class=\"lose\">The phrase was: \"" . $this->phrase->getPhrase() . "\". Better luck next time!</h1>";
+            return $string;
+        } elseif($this->checkForWin()) {
+            $string = "<h1 id=\"overlay\" class=\"win\">Congratulations on guessing: \"" . $this->phrase->getPhrase() . "\"</h1>";
+            return $string;
+        }
         //this method displays one message if the player wins and another message if they lose. It returns false if the game has not been won or lost.
     }
 
@@ -109,9 +128,9 @@ class Game
                     $score .= "<li class=\"tries\"><img src=\"images/lostHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
                     ++$i;
                 }
-               
+                $score .= "<li class=\"tries\"><img src=\"images/liveHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
             }
-            $score .= "<li class=\"tries\"><img src=\"images/liveHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
+            
         
 
         $score .= "</ol>\n</div>";
