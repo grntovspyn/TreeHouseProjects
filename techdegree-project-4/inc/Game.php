@@ -98,24 +98,36 @@ class Game
 
     }
 
-    public function displayScore($incorrectKey) {
+    public function displayScore() {
         $score = "<div id=\"scoreboard\" class=\"section\">\n<ol>\n";
         /*
         * Display the number of guesses available. See the example_html/scoreboard.txt file for an 
         * example of what the render HTML for a scoreboard should look like. Return string HTML of Scoreboard.
         */
         for ($i = 1; $i <= $this->lives; ++$i) {
-            if (strlen($incorrectKey) >= 1 && strlen($incorrectKey) < $this->lives) {
-                while ($i <= strlen($incorrectKey)) {
+                while ($i <= $this->phrase->numberLost()) {
                     $score .= "<li class=\"tries\"><img src=\"images/lostHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
                     ++$i;
                 }
                
             }
             $score .= "<li class=\"tries\"><img src=\"images/liveHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
-        }
+        
 
         $score .= "</ol>\n</div>";
+
+        // for ($i = 1; $i <= $this->lives; ++$i) {
+        //     if (strlen($incorrectKey) >= 1 && strlen($incorrectKey) < $this->lives) {
+        //         while ($i <= strlen($incorrectKey)) {
+        //             $score .= "<li class=\"tries\"><img src=\"images/lostHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
+        //             ++$i;
+        //         }
+               
+        //     }
+        //     $score .= "<li class=\"tries\"><img src=\"images/liveHeart.png\" height=\"35px\" widght=\"30px\"></li>\n";
+        // }
+
+        // $score .= "</ol>\n</div>";
 
         return $score;
     }

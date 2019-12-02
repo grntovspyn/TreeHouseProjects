@@ -3,15 +3,12 @@ session_start();
 require "inc/Game.php";
 require "inc/Phrase.php";
 
-if(!isset($_SESSION['letters'])){
-    $_SESSION['letters'] = "";
-}
-
-if(!isset($_SESSION['selected'])){
-    $_SESSION['selected'] = array();
-}
 
 if(isset($_POST['startgame'])){
+    unset($_SESSION['selected']);
+    unset($_SESSION['phrase']);
+    $_SESSION['letters'] = "";
+    $_SESSION['selected'] = array();
     $phrase = new Phrase();
     $_SESSION['phrase'] = $phrase->getPhrase();
 
@@ -29,7 +26,7 @@ var_dump($_SESSION);
 
 
  $game = new Game($phrase);
-
+ $phrase->numberLost();
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +51,7 @@ var_dump($_SESSION);
     
     <a href="inc/endsession.php">Start Over</a>
 </div>
+
 
 </body>
 </html>

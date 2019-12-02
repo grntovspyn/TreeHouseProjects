@@ -8,7 +8,9 @@ class Phrase
         "Boldness be my friend",
         "Leave no stone unturned",
         "Broken crayons still color",
-        "The adventure begins"
+        "The adventure begins",
+        "Dream without fear",
+        "Love without limits"
     );
 
     public function __construct($phrase = "",$letters = array()) {
@@ -69,10 +71,14 @@ class Phrase
        
     }
 
+    public function getLetterArray() {
+
+        return array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
+    }
    
      //checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
     public function checkLetter($letter) {
-        $characters = array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
+        $characters = $this->getLetterArray();
 
         if (in_array($letter, $characters)) {
             return true;
@@ -80,9 +86,14 @@ class Phrase
             return false;
         }
 
- 
+        
+    }
 
-       
+    public function numberLost() {
+
+        var_dump(count(array_diff($this->selected, $this->getLetterArray())));
+
+
     }
  
     public function getPhrase() {
