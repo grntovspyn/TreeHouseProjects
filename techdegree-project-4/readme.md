@@ -5,4 +5,4 @@
 
 I hope you enjoy this project. I went through multiple different ways of accomplishing it and refractoring my code.  
 
-![Image of Main Screen](/screenshots/index.png)
+![Image of Main Screen](screenshots/index.png)
