@@ -44,8 +44,10 @@ class Phrase
 
        $characters = str_split(strtolower($this->currentPhrase));
  
-            $displayString = "<div id=\"phrase\" class=\"section\"><ul>\n";
+        $displayString = "<div id=\"phrase\" class=\"section\"><ul>\n";
                
+        //This checks whether correct letter has been selected.
+
        foreach ($characters as $character) {
 
            switch($character) {
@@ -70,6 +72,7 @@ class Phrase
        
     }
 
+    //Convert phrase into an array of just it's unique letters.
     public function getLetterArray() {
 
         return array_unique(str_split(str_replace(' ', '',strtolower($this->currentPhrase))));
@@ -95,6 +98,7 @@ class Phrase
 
     }
  
+    //Used to be able to pull the phrase for the Game class
     public function getPhrase() {
         
         return $this->currentPhrase;
