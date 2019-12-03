@@ -21,12 +21,8 @@ if (isset($_POST['key'])) {
 }
 
 
-var_dump($_POST);
-var_dump($_SESSION);
-
-
  $game = new Game($phrase);
- var_dump($game->checkForLose());
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +33,7 @@ var_dump($_SESSION);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+    <script src="js/scripts.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
@@ -57,6 +54,7 @@ var_dump($_SESSION);
    
     <a href="inc/endsession.php">Start Over</a>
 </div>
+
 
 
 </body>

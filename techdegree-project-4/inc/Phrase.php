@@ -43,8 +43,7 @@ class Phrase
         */
 
        $characters = str_split(strtolower($this->currentPhrase));
-       var_dump($this->selected);
-       //$selected = implode(",", $this->selected);
+ 
             $displayString = "<div id=\"phrase\" class=\"section\"><ul>\n";
                
        foreach ($characters as $character) {

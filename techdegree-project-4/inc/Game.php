@@ -33,17 +33,18 @@ class Game
     public function gameOver() {
         
         if($this->checkForLose()){
-            $string = "<h1 id=\"overlay\" class=\"lose\">The phrase was: \"" . $this->phrase->getPhrase() . "\". Better luck next time!</h1>";
+            $string = "<div id=\"overlay\" class=\"lose\" ><h2 class=\"overlayheader\">Phrase Hunter</h2><br><h1 >The phrase was: \"" . $this->phrase->getPhrase() . "\". Better luck next time!</h1>";
+            $string .= "<br> <a class=\"lose a\" href=\"inc/endsession.php\">Start Over</a></div>";
             return $string;
         } elseif($this->checkForWin()) {
-            $string = "<h1 id=\"overlay\" class=\"win\">Congratulations on guessing: \"" . $this->phrase->getPhrase() . "\"</h1>";
+            $string = "<div id=\"overlay\" class=\"win\" ><h2 class=\"overlayheader\">Phrase Hunter</h2><br><h1>Congratulations on guessing: \"" . $this->phrase->getPhrase() . "\"</h1>";
+            $string .= "<br> <a class=\"win a\" href=\"inc/endsession.php\">Start Over</a></div>";
             return $string;
         }
         //this method displays one message if the player wins and another message if they lose. It returns false if the game has not been won or lost.
     }
 
     public function displayKeyboard($selected){
-        var_dump($this->phrase->getPhrase());
         $rowOneArray = array("q","w","e","r","t","y","u","i","o","p");
         $rowTwoArray = array("a","s","d","f","g","h","j","k","l");
         $rowThreeArray = array("z","x","c","v","b","n","m");
@@ -63,7 +64,7 @@ class Game
         
     
         foreach($rowOneArray as $rowOneLetter) {
-            $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowOneLetter . "\" ";
+            $keyboard .= "<button id=\"" . $rowOneLetter . "\" class=\"key\" name=\"key\" value=\"" . $rowOneLetter . "\" ";
             
             if (in_array($rowOneLetter, $selected)) {
                 if ($this->phrase->checkLetter($rowOneLetter)) {
@@ -80,7 +81,7 @@ class Game
        
         $keyboard .= "</div> \n <div class=\"keyrow\">\n";
         foreach($rowTwoArray as $rowTwoLetter) {
-            $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowTwoLetter . "\" ";
+            $keyboard .= "<button id=\"" . $rowTwoLetter . "\" class=\"key\" name=\"key\" value=\"" . $rowTwoLetter . "\" ";
             if (in_array($rowTwoLetter, $selected)) {
                 if ($this->phrase->checkLetter($rowTwoLetter)) {
                 
@@ -98,7 +99,7 @@ class Game
         $keyboard .= "</div> \n <div class=\"keyrow\">\n";
 
         foreach($rowThreeArray as $rowThreeLetter) {
-            $keyboard .= "<button class=\"key\" name=\"key\" value=\"" . $rowThreeLetter . "\" ";
+            $keyboard .= "<button id=\"" . $rowThreeLetter . "\" class=\"key\" name=\"key\" value=\"" . $rowThreeLetter . "\" ";
             if (in_array($rowThreeLetter, $selected)) {
                 if ($this->phrase->checkLetter($rowThreeLetter)) {
                 

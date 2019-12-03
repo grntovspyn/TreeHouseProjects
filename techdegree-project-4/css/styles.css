@@ -183,6 +183,10 @@ input[type=submit].correct {
   border-radius: 5px;
 }
 
+.overlayheader {
+  color: white;
+}
+
 .title {
   color: #FFF;
 }
@@ -200,7 +204,8 @@ input[type=submit].correct {
 }
 
 .win a {
-  color: var(--color-win);
+  color: white;
+  text-decoration: none;
 }
 
 .lose {
@@ -208,5 +213,6 @@ input[type=submit].correct {
 }
 
 .lose a {
-  color: var(--color-lose);
+  color: white;
+  text-decoration: none;
 }
